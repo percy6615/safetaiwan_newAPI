@@ -1,0 +1,199 @@
+<kml xmlns="http://www.opengis.net/kml/2.2"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>民眾通報,ST</name>
+        <open>0</open>
+        <Style id="icon1">
+            <IconStyle>
+                <scale>0.7</scale>
+                <Icon>
+                    <href>http://link.safetaiwan.tw/mobile_app/icon/streport/pplg.png</href>
+                </Icon>
+                <hotSpot x="0.5" xunits="fraction" y="0.5" yunits="fraction"/>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0</scale>
+            </LabelStyle>
+            <ListStyle>
+                <ItemIcon>
+                    <href>http://link.safetaiwan.tw/mobile_app/icon/streport/pplg.png</href>
+                </ItemIcon>
+            </ListStyle>
+        </Style>
+        <Style id="icon2">
+            <IconStyle>
+                <scale>0.7</scale>
+                <Icon>
+                    <href>http://link.safetaiwan.tw/mobile_app/icon/streport/pplb.png</href>
+                </Icon>
+                <hotSpot x="0.5" xunits="fraction" y="0.5" yunits="fraction"/>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0</scale>
+            </LabelStyle>
+            <ListStyle>
+                <ItemIcon>
+                    <href>http://link.safetaiwan.tw/mobile_app/icon/streport/pplb.png</href>
+                </ItemIcon>
+            </ListStyle>
+        </Style>
+        <Style id="icon3">
+            <IconStyle>
+                <scale>0.7</scale>
+                <Icon>
+                    <href>http://link.safetaiwan.tw/mobile_app/icon/streport/pplr.png</href>
+                </Icon>
+                <hotSpot x="0.5" xunits="fraction" y="0.5" yunits="fraction"/>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0</scale>
+            </LabelStyle>
+            <ListStyle>
+                <ItemIcon>
+                    <href>http://link.safetaiwan.tw/mobile_app/icon/streport/pplr.png</href>
+                </ItemIcon>
+            </ListStyle>
+        </Style>
+        <Folder>
+            <name>事件資訊</name>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;測試測試~~
+各位切勿驚慌，純屬試試能否使用。&lt;/td&gt;2017-03-30 16:44:29&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>張建源</name>
+                <styleUrl>#icon2</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>121.4248593,24.9971332</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;臺東近海規模4.5地震&lt;/br&gt;2017-03-30 00:44:40&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170330004440_352738080071540.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170330004440_352738080071540.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>鄭傑文</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>121.5918929,25.0818933</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;臺東外海強震即時警報規模5.0&lt;/br&gt;2017-03-30 00:36:53&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170330003653_352738080071540.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170330003653_352738080071540.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>鄭傑文</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>121.5918929,25.0818933</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;這是測試，不要驚&lt;/br&gt;2017-03-28 17:16:05&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328171615_355693062270908.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328171615_355693062270908.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>陳明雄</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>120.4952098,23.2182614</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;嘉義所的教育訓練，我們自己學到的反而更多&lt;/br&gt;2017-03-28 16:09:22&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328160854_355284061733623.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328160854_355284061733623.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>MingYi  Chen</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>120.2831359,23.4560731</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;安全臺灣SafeTaiwan教育訓練@嘉義區監理所&lt;/br&gt;2017-03-28 15:59:29&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328155902_357220077438888.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328155902_357220077438888.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>陳守強</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>120.2831359,23.4559892</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;五工處教育訓練，成功！&lt;/br&gt;2017-03-28 11:59:13&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328115845_355284061733623.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328115845_355284061733623.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>MingYi  Chen</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>120.4568258,23.4866291</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;我很安全&lt;/br&gt;2017-03-28 11:51:48&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328115120_352875082824409.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328115120_352875082824409.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>Brent Wang</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>120.4569608,23.4859721</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;安全臺灣SafeTaiwan教育訓練@第五區養護工程處&lt;/br&gt;2017-03-28 11:47:56&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328114729_357220077438888.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328114729_357220077438888.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>陳守強</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>120.4569608,23.4859721</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;我很安全&lt;/br&gt;2017-03-28 11:29:37&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328112910_359226071842171.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328112910_359226071842171.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>Sow Liu</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>121.2085721,24.8196953</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;我很安全&lt;/br&gt;2017-03-25 23:14:46&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170325231421_355123060557312.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170325231421_355123060557312.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>James Tai</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>121.5080496,24.9898282</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;第17號地震規模4.1&lt;/br&gt;2017-03-25 23:14:14&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170325231414_352738080071540.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170325231414_352738080071540.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>鄭傑文</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>121.5918929,25.0818105</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;我很安全&lt;/td&gt;2017-03-25 00:52:03&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>Wei Chen</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>121.564069,25.083953</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;強震即時警報規模5.4於石桓島&lt;/br&gt;2017-03-25 00:51:22&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170325005122_352738080071540.jpg' border='0'&gt;&lt;img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170325005122_352738080071540.jpg' width='300px' /&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>鄭傑文</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>121.5918929,25.0818105</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark>
+                <description>&lt;table border='0' padding='0' &gt;&lt;tr&gt;&lt;td&gt;我很安全&lt;/td&gt;2017-03-25 00:22:20&lt;/tr&gt;&lt;/table&gt;</description>
+                <name>Zoe Chiang</name>
+                <styleUrl>#icon1</styleUrl>
+                <Point>
+                    <gx:drawOrder>1</gx:drawOrder>
+                    <coordinates>120.696823,24.088872</coordinates>
+                </Point>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>
+
