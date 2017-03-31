@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -69,5 +70,11 @@ public class CommonTools {
 			e.printStackTrace();
 		}
 		return con;
+	}
+	public String generateUUID(){
+		
+		String s = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+		return s;
+		
 	}
 }
