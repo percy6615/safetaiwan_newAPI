@@ -9,7 +9,7 @@ public class DBFunction  {
 		
 	}
 	public Connection getConnection(){
-		CommonDBSource CDBS = CommonDBSource.getInstance();
+		DBSource CDBS = CommonDBSource.getInstance();
 		Connection conn = CDBS.getConnection();
 		return conn;
 	}

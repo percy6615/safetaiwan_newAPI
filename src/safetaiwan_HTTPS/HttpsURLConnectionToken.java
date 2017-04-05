@@ -11,8 +11,8 @@ import safetaiwan_CommTools.CommonTools;
 public class HttpsURLConnectionToken {
 
 	final static String stAPIUrl = "https://www.safetaiwan.tw/api2d/api/";
-	private static String YourAPIKey = "U7x567PAj7up//PkoAQZxC/kd5RAdGgxuEAZb5yhF4/Me5iRB4CpOF/MdK/Ed+xFvJ/cbAQZxC/k";
-	private final static String USER_AGENT = "Mozilla/5.0";
+	private String YourAPIKey = "U7x567PAj7up//PkoAQZxC/kd5RAdGgxuEAZb5yhF4/Me5iRB4CpOF/MdK/Ed+xFvJ/cbAQZxC/k";
+	private final  String USER_AGENT = "Mozilla/5.0";
 	private String curlOptMain = stAPIUrl + "?apikey=" + YourAPIKey;
 	private int layerid = 7912;
 	String token = "";

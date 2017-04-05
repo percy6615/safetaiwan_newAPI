@@ -24,13 +24,13 @@ public class DisasterNotificationParser {
 		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
 		disasterNotificationParser.setKml("test.kml");
 		List<?>  list= disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml());
-		List<String> descriptionList = new ArrayList();
+		List<String> descriptionList = new ArrayList<String>();
 		for(int i = 0 ; i < list.size();i++){
 			String description = ((DisasterNotification)list.get(i)).getReportContent();
 			System.out.println(description);
 			descriptionList.add(description);
 		}
-		String description0 = descriptionList.get(0);
+		
 		
 	}
 
