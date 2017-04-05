@@ -113,8 +113,8 @@ public class DisasterNotification {
 		this.fileName = fileName;
 	}
 
-	public void descriptionTag(String htmlDesciption) {
-		Document doc = Jsoup.parse(htmlDesciption);
+	public void descriptionParser() {
+		Document doc = Jsoup.parse(this.description);
 		Elements link = doc.select("tr");
 
 		int linkNum = link.size();
@@ -123,7 +123,6 @@ public class DisasterNotification {
 			String[] content = e1.html().split("<br>");
 			setReportContent(content[0]);
 			setReportDate(commonTools.StringToTimestamp(content[1]));
-
 			Element e2 = link.get(1).select("td").first();
 			Element a = e2.select("a").first();
 			String imgPath = a.attr("href");

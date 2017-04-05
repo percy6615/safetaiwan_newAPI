@@ -2,6 +2,7 @@ package safetaiwan_messageObject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import safetaiwan_CommTools.DBSource.DBFunction;
@@ -10,7 +11,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 
 	public void insertDisasterNotificationToDB(DisasterNotification disasterNotification) {
 		Connection conn = getConnection();
-		String insertSQL = "insert into disaster.safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?)";
+		String insertSQL = "insert into disaster.safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(insertSQL);
@@ -23,6 +24,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			pstmt.setString(7, disasterNotification.getReportContent());
 			pstmt.setTimestamp(8, disasterNotification.getReportDate());
 			pstmt.setString(9, disasterNotification.getImgURL());
+			pstmt.setString(10, disasterNotification.getFileName());
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 			
@@ -34,6 +36,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 	public void createDisasterNotification(){
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
+		String selectSQL = "SELECT 1 as tf FROM information_schema.tables where table_name = 'safetaiwan_disasternotification'";
 		String createSQL = "CREATE TABLE `safetaiwan_disasternotification` ( "+
 				"`uuid` varchar(64) NOT NULL, "+
 				"`name` varchar(32) DEFAULT NULL, "+
@@ -48,11 +51,17 @@ public class DisasterNotificationDBfunction extends DBFunction {
 				"PRIMARY KEY (`uuid`) "+
 				") ENGINE=InnoDB DEFAULT CHARSET=utf8 ";
 		try {
-			pstmt = conn.prepareStatement(createSQL);
-			pstmt.executeUpdate();
-			pstmt.clearParameters();
+			ResultSet r = conn.prepareStatement(selectSQL).executeQuery();
+			if(r.next()){
+				System.out.println(r.getInt("tf"));
+				return;
+			}else{
+				pstmt = conn.prepareStatement(createSQL);
+				pstmt.executeUpdate();
+				pstmt.clearParameters();
+			}			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

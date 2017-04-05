@@ -60,6 +60,7 @@ public class DisasterNotificationParser {
 				}
 				DisasterNotification disasterNotification = new DisasterNotification(name, CoordinatesPointList,
 						description, styleUrl);
+				disasterNotification.descriptionParser(); //descript html parser to object
 				returnObject.add(disasterNotification);
 			}
 		}
