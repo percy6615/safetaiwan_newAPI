@@ -1,8 +1,8 @@
 package safetaiwan_messageObject;
 
 public class CoordinatesPoint {
-	double longitudeCoord;
-	double latitudeCoord;
+	private double longitudeCoord;
+	private double latitudeCoord;
 
 	public double getLongitudeCoord() {
 		return longitudeCoord;

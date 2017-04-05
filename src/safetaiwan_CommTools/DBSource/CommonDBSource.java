@@ -15,7 +15,7 @@ public class CommonDBSource implements DBSource {
 	private String user;
 	private String passwd;
 	private ComboPooledDataSource cpds;
-	private static CommonDBSource datasource;
+	private static volatile  CommonDBSource datasource;
 
 	public static CommonDBSource getInstance() {
 		if (datasource == null) {
@@ -62,11 +62,22 @@ public class CommonDBSource implements DBSource {
 		cpds.setMaxStatements(Integer.valueOf(maxstatements));
 	}
 
-	public Connection getConnection() throws SQLException {
-		return this.cpds.getConnection();
+	public Connection getConnection()  {
+		try {
+			return this.cpds.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public void closeConnection(Connection conn) throws SQLException {
-		conn.close();
+	public void closeConnection(Connection conn)  {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
