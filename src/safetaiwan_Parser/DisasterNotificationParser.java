@@ -26,7 +26,7 @@ public class DisasterNotificationParser {
 		List<?>  list= disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml());
 		List<String> descriptionList = new ArrayList();
 		for(int i = 0 ; i < list.size();i++){
-			String description = ((DisasterNotification)list.get(i)).getDescription();
+			String description = ((DisasterNotification)list.get(i)).getReportContent();
 			System.out.println(description);
 			descriptionList.add(description);
 		}
@@ -67,7 +67,10 @@ public class DisasterNotificationParser {
 		return returnObject;
 
 	}
-
+// //*[@id="viewplayer"]/div[2]/video
+//	//*[@id="viewplayer"]/div[2]
+//	#viewplayer > div.jw-media.jw-reset
+//	<div class="jw-media jw-reset"><video class="jw-video jw-reset" x-webkit-airplay="allow" webkit-playsinline="" src="https://redirector.googlevideo.com/videoplayback?id=0acfde7554cf123c&amp;itag=37&amp;source=webdrive&amp;requiressl=yes&amp;ttl=transient&amp;mm=30&amp;mn=sn-vgqs7ns7&amp;ms=nxu&amp;mv=u&amp;pl=32&amp;ei=Q8nkWJuOGNXnqgWg6anIAg&amp;mime=video/mp4&amp;lmt=1491198205707619&amp;mt=1491388622&amp;ip=2604:4300:a:11:202:c9ff:feb9:574a&amp;ipbits=0&amp;expire=1491403139&amp;sparams=ip%2Cipbits%2Cexpire%2Cid%2Citag%2Csource%2Crequiressl%2Cttl%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cei%2Cmime%2Clmt&amp;signature=9BA0BF550EA220F601FB7BA1F77D9DBED945B86A.255D05F83D122A03C59FC0961B0C22C6B7C8AFD8&amp;key=ck2&amp;app=explorer" style="transform: scale(0.482292, 0.481481); left: -497px; right: -497px; width: 1920px; height: 1080px; bottom: -280px; top: -280px;"></video></div>
 	public Kml getKml() {
 		return kml;
 	}

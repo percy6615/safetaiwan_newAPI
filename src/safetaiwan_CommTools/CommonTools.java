@@ -101,15 +101,18 @@ public class CommonTools {
 		return dateString;
 	}
 
-	public Timestamp StringToTimestamp(String something) {
+	public  Timestamp StringToTimestamp(String something) {
 
 		SimpleDateFormat dateFormat = null;
 		if (something.contains(".")) {
 			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
 		}
-		if (something.contains(",")) {
+		else if (something.contains(",")) {
 			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss,SSS");
+		}else{
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		}
+		
 		Timestamp timestamp = null;
 		Date parsedDate;
 		try {
