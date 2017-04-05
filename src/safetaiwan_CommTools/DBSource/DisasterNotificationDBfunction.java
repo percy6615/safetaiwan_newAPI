@@ -1,11 +1,11 @@
-package safetaiwan_messageObject;
+package safetaiwan_CommTools.DBSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import safetaiwan_CommTools.DBSource.DBFunction;
+import safetaiwan_messageObject.DisasterNotification;
 
 public class DisasterNotificationDBfunction extends DBFunction {
 

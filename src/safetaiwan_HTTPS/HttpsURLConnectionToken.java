@@ -17,6 +17,7 @@ public class HttpsURLConnectionToken {
 	private int layerid = 7912;
 	String token = "";
 	String tokenUrl = stAPIUrl + "?layerid=" + layerid + "&token=" + token;
+	private final static String USER_AGENT_ver1 = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36";
 
 //	public static void main(String[] args) {
 //		int layeridMain = 7912;
@@ -37,7 +38,7 @@ public class HttpsURLConnectionToken {
 			con.setRequestMethod("GET");
 
 			// add request header
-			con.setRequestProperty("User-Agent", USER_AGENT);
+			con.setRequestProperty("User-Agent", USER_AGENT_ver1);
 
 			int responseCode = con.getResponseCode();
 			System.out.println("\nSending 'GET' request to URL : " + url);

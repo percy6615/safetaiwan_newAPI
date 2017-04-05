@@ -13,7 +13,7 @@ import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
-import safetaiwan_messageObject.DisasterNotificationDBfunction;
+import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
 
 public class paserDisasterNotification {
 
