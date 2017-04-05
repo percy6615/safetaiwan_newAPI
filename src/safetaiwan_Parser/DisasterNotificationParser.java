@@ -31,7 +31,6 @@ public class DisasterNotificationParser {
 			descriptionList.add(description);
 		}
 		
-		
 	}
 
 	public  List<?> disasterNotificationParserList(Kml kml) {

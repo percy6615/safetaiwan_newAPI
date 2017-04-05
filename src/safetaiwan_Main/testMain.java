@@ -1,35 +1,65 @@
 package safetaiwan_Main;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
+import safetaiwan_CommTools.CommonTools;
 
 public class testMain {
-	public static void main(String[] args) {
-		StringToTimestamp("2017-03-23 14:54:00");
-	}
-	public static Timestamp StringToTimestamp(String something) {
-
-		SimpleDateFormat dateFormat = null;
-		if (something.contains(".")) {
-			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-		}
-		else if (something.contains(",")) {
-			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss,SSS");
-		}else{
-			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		}
-		
-		Timestamp timestamp = null;
-		Date parsedDate;
+	public static void main(String[] args)  {
+		// capture rendered page
+		WebClient webClient = new WebClient();
+		HtmlPage myPage = null;
 		try {
-			parsedDate = dateFormat.parse(something);
-			timestamp = new java.sql.Timestamp(parsedDate.getTime());
-
-		} catch (ParseException e) {
+			myPage = webClient.getPage("http://xmovies.to/watch/snis-872-cheap-iki-92-times-7301.html");
+		} catch (FailingHttpStatusCodeException | IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return timestamp;
+
+		// convert to jsoup dom
+		Document doc = Jsoup.parse(myPage.asXml());
+		String ddd = doc.html();
+		System.out.println(ddd);
+		
+		String s = CommonTools.APPLocation();
+		String outFilePathALL = s + "/resources/exampledata/" + "1.txt";
+		Path file = Paths.get(outFilePathALL);
+		
+		List<String> lines = Arrays.asList(ddd);
+		try {
+			Files.write(file, lines, Charset.forName("UTF-8"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// extract data using jsoup selectors
+//		Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+//		for (Element image : images) {
+//		    System.out.println("src : " + image.attr("src"));
+//		}
+
+		// clean up resources
+		webClient.close();
 	}
+	
 }
