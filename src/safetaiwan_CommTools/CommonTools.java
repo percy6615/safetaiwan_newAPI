@@ -6,6 +6,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
@@ -16,11 +21,11 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class CommonTools {
+
 	public static String APPLocation() {
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		return s;
-
 	}
 
 	public static void sysPrint2D(String[][] a) {
@@ -34,9 +39,7 @@ public class CommonTools {
 
 	public static void sysPrint1D(String[] a) {
 		for (int i = 0; i < a.length; i++) {
-
 			System.out.print(a[i] + " ");
-
 		}
 	}
 
@@ -71,10 +74,29 @@ public class CommonTools {
 		}
 		return con;
 	}
-	public String generateUUID(){
-		
+
+	public String generateUUID() {
 		String s = UUID.randomUUID().toString().replace("-", "").toLowerCase();
 		return s;
-		
+	}
+	
+	public Date StringToDate(String stringDate){
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.ENGLISH);
+		Date d = null;
+		try {
+			d = format.parse(stringDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return d ;
+	}
+	
+	public String DateToString(Date d){
+		//設定日期格式
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//進行轉換
+		String dateString = sdf.format(d);
+		return dateString;
 	}
 }

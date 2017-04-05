@@ -24,9 +24,14 @@ public class DisasterNotificationParser {
 		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
 		disasterNotificationParser.setKml("test.kml");
 		List<?>  list= disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml());
+		List<String> descriptionList = new ArrayList();
 		for(int i = 0 ; i < list.size();i++){
-			System.out.println(((DisasterNotification)list.get(i)).getDescription());;
+			String description = ((DisasterNotification)list.get(i)).getDescription();
+			System.out.println(description);
+			descriptionList.add(description);
 		}
+		String description0 = descriptionList.get(0);
+		
 	}
 
 	public  List<?> disasterNotificationParserList(Kml kml) {
@@ -86,5 +91,5 @@ public class DisasterNotificationParser {
 	public static int featureListSize(List<?> Listf) {
 		return Listf.size();
 	}
-
+	
 }
