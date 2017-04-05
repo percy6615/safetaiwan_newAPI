@@ -27,7 +27,7 @@ public class CommonDBSource implements DBSource {
 	}
 
 	public CommonDBSource() {
-		this("resource/jdbc.properties");
+		this("resources/cfg/jdbc.properties");
 	}
 
 	public CommonDBSource(String configFile) {

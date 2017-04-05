@@ -13,11 +13,18 @@ import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
+import safetaiwan_messageObject.DisasterNotificationDBfunction;
 
 public class paserDisasterNotification {
 
 	public static void main(String[] args) {
-
+		
+		
+		DisasterNotificationDBfunction disasterNotificationDBfunction =new DisasterNotificationDBfunction();
+		
+		disasterNotificationDBfunction.createDisasterNotification();
+		
+		
 		String htmla = "<table border='0' padding='0' ><tr><td>我很安全</td>2017-03-23 14:54:00</tr></table>";
 		htmla = "<table border='0' padding='0' ><tr><td>這是測試，不要驚</br>2017-03-28 17:16:05</td></tr><tr><td><a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328171615_355693062270908.jpg' border='0'><img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170328171615_355693062270908.jpg' width='300px' /></a></td></tr></table>";
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.ENGLISH);

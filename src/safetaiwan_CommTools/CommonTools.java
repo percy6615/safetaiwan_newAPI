@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -79,8 +80,8 @@ public class CommonTools {
 		String s = UUID.randomUUID().toString().replace("-", "").toLowerCase();
 		return s;
 	}
-	
-	public Date StringToDate(String stringDate){
+
+	public Date StringToDate(String stringDate) {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.ENGLISH);
 		Date d = null;
 		try {
@@ -89,14 +90,35 @@ public class CommonTools {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return d ;
+		return d;
 	}
-	
-	public String DateToString(Date d){
-		//設定日期格式
+
+	public String DateToString(Date d) {
+		// 設定日期格式
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		//進行轉換
+		// 進行轉換
 		String dateString = sdf.format(d);
 		return dateString;
+	}
+
+	public Timestamp StringToTimestamp(String something) {
+
+		SimpleDateFormat dateFormat = null;
+		if (something.contains(".")) {
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		}
+		if (something.contains(",")) {
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss,SSS");
+		}
+		Timestamp timestamp = null;
+		Date parsedDate;
+		try {
+			parsedDate = dateFormat.parse(something);
+			timestamp = new java.sql.Timestamp(parsedDate.getTime());
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return timestamp;
 	}
 }

@@ -1,5 +1,7 @@
 package safetaiwan_messageObject;
 
+import java.io.File;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +19,10 @@ public class DisasterNotification {
 	private String description;
 	private String iconStyleID;
 	private String reportContent;
-	private Date reportDate;
+	private Timestamp reportDate;
 	private String imgURL;
 	private CommonTools commonTools = new CommonTools();
+	private String fileName;
 
 	public DisasterNotification() {
 		this.uuid = commonTools.generateUUID();
@@ -82,11 +85,11 @@ public class DisasterNotification {
 		this.reportContent = reportContent;
 	}
 
-	public Date getReportDate() {
+	public Timestamp getReportDate() {
 		return this.reportDate;
 	}
 
-	public void setReportDate(Date reportDate) {
+	public void setReportDate(Timestamp reportDate) {
 		this.reportDate = reportDate;
 	}
 
@@ -102,6 +105,14 @@ public class DisasterNotification {
 		return this.uuid;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	public void descriptionTag(String htmlDesciption) {
 		Document doc = Jsoup.parse(htmlDesciption);
 		Elements link = doc.select("tr");
@@ -111,13 +122,14 @@ public class DisasterNotification {
 			Element e1 = link.get(0).select("td").first();
 			String[] content = e1.html().split("<br>");
 			setReportContent(content[0]);
-			setReportDate(commonTools.StringToDate(content[1]));
+			setReportDate(commonTools.StringToTimestamp(content[1]));
 
 			Element e2 = link.get(1).select("td").first();
 			Element a = e2.select("a").first();
 			String imgPath = a.attr("href");
 			setImgURL(imgPath);
-
+			File f = new File(imgPath);
+			setFileName(f.getName());
 			System.out.println(imgPath);
 			System.out.println(content[0]);
 			System.out.println(content[1]);
@@ -128,7 +140,7 @@ public class DisasterNotification {
 			Element e1 = e.select("td").first();
 			String recallContent = e1.text();
 			setReportContent(recallContent);
-			setReportDate(commonTools.StringToDate(splitChar[1]));
+			setReportDate(commonTools.StringToTimestamp(splitChar[1]));
 			setImgURL(null);
 			System.out.println(recallContent);
 			System.out.println(splitChar[1]);
