@@ -11,7 +11,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 
 	public void insertDisasterNotificationToDB(DisasterNotification disasterNotification) {
 		Connection conn = getConnection();
-		String insertSQL = "insert into disaster.safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?)";
+		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(insertSQL);
@@ -41,7 +41,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 				"`uuid` varchar(64) NOT NULL, "+
 				"`name` varchar(32) DEFAULT NULL, "+
 				"`longitudeCoord` decimal(16,0) DEFAULT NULL, "+
-				"`latitudeCoord` varchar(16) DEFAULT NULL, "+
+				"`latitudeCoord` decimal(16,0) DEFAULT NULL, "+
 				"`description` varchar(256) DEFAULT NULL, "+
 				"`iconStyleID` varchar(32) DEFAULT NULL, "+
 				"`reportContent` varchar(128) DEFAULT NULL, "+

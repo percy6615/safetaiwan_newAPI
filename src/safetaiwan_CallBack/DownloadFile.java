@@ -6,15 +6,15 @@ package safetaiwan_CallBack;
  * @author xiaanming
  *
  */
-public class Li implements Runnable {
-	CallBack call;
+public class DownloadFile implements Runnable {
+	CallBackParser call;
 	String fileName;
 
-	Li() {
+	DownloadFile() {
 
 	}
 
-	Li(CallBack call, String fileName) {
+	DownloadFile(CallBackParser call, String fileName) {
 		this.call = call;
 		this.fileName = fileName;
 	}
@@ -26,20 +26,23 @@ public class Li implements Runnable {
 	 * @param question
 	 *            小王问的问题
 	 */
-	public void executeMessage() {
+	public void downloadKML() {
 
 		System.out.println("小王问的问题--->" + fileName);
 		// 模拟小李办自己的事情需要很长时间
-		int jj =0;
+
+		double jj = 0;
 		for (int i = 0; i < 10000000; i++) {
-			for (int j = 0; j < 10000000; j++) {
-				for (int k = 0; k < 10; k++) {
+			for (int j = 0; j < 1000; j++) {
+				for (int k = 0; k < 1; k++) {
 					
 //					System.out.println(jj++);
+					jj++;
 				}
 			}
-			jj++;
+			
 		}
+		System.out.println(Integer.MAX_VALUE);
 		System.out.println(jj);
 		/**
 		 * 小李办完自己的事情之后想到了答案是2

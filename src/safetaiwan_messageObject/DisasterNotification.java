@@ -2,6 +2,7 @@ package safetaiwan_messageObject;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -25,12 +26,16 @@ public class DisasterNotification {
 
 	public DisasterNotification() {
 		this.uuid = commonTools.generateUUID();
+		this.coordinatesPoints = new ArrayList<CoordinatesPoint>();
+		CoordinatesPoint coordinatesPoint = new CoordinatesPoint();
+		this.coordinatesPoints.add(coordinatesPoint);
 	}
 
 	public DisasterNotification(DisasterNotification disasterNotification) {
 		this.uuid = commonTools.generateUUID();
 		this.name = disasterNotification.getName();
-		this.coordinatesPoints = disasterNotification.getCoordinatesPoints();
+		this.coordinatesPoints = new ArrayList<CoordinatesPoint>();
+		this.coordinatesPoints.addAll(disasterNotification.getCoordinatesPoints());
 		this.description = disasterNotification.getDescription();
 		this.iconStyleID = disasterNotification.getIconStyleID();
 	}

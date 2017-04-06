@@ -1,4 +1,4 @@
-package safetaiwan_CallBack;
+package safetaiwan_CallBack.copy;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,7 +32,7 @@ public class Wang implements CallBackParser {
 	 * 小王通过这个方法去问小李的问题
 	 * @param question  就是小王要问的问题,1 + 1 = ?
 	 */
-	public void pleaseDownloadKML(){
+	public void askQuestion(){
 		System.out.println("start:"+new SimpleDateFormat("yyyy-MM-dd HH:ss:mm").format(new Date(System.currentTimeMillis())));
 		//这里用一个线程就是异步，
 		Li li = new Li(Wang.this,"C:\\workspaceJAVA\\safetaiwan_newAPI\\resources\\exampledata\\7912_201703311125.kml");
