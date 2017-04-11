@@ -12,6 +12,8 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Node;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
@@ -68,6 +70,9 @@ public class KMLReceiveFromNet {
 			// connection.setRequestProperty("Accept", "application/xml");
 
 			InputStream src1 = connection.getInputStream();
+			 String str = IOUtils.toString( src1 );
+			    IOUtils.closeQuietly( src1 );
+			    str = StringUtils.replace( str, "xmlns=\"http://earth.google.com/kml/2.2\"", "xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\"" );
 
 			// final InputSource src = new InputSource(new StringReader(xml));
 			final Node document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src1)

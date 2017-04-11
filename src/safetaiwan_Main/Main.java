@@ -16,21 +16,21 @@ public class Main {
 
 	public static void main(String[] args) {
 		// get token url
-//		int layeridMain = 7912;
-//		String YourAPIKeyMain = "U7x567PAj7up//PkoAQZxC/kd5RAdGgxuEAZb5yhF4/Me5iRB4CpOF/MdK/Ed+xFvJ/cbAQZxC/k";
-//		HttpsURLConnectionToken httpsURLConnectionToken = new HttpsURLConnectionToken(layeridMain, YourAPIKeyMain);
-//		String getURLToken = httpsURLConnectionToken.refleshTokenUrl();
+		int layeridMain = 7912;
+		String YourAPIKeyMain = "U7x567PAj7up//PkoAQZxC/kd5RAdGgxuEAZb5yhF4/Me5iRB4CpOF/MdK/Ed+xFvJ/cbAQZxC/k";
+		HttpsURLConnectionToken httpsURLConnectionToken = new HttpsURLConnectionToken(layeridMain, YourAPIKeyMain);
+		String getURLToken = httpsURLConnectionToken.refleshTokenUrl();
 
 		// download kml to file system
 		Date d = new Date(System.currentTimeMillis());
 		Timestamp currentTimeStamp = new Timestamp(d.getTime());
-//		SimpleDateFormat s = new SimpleDateFormat("yyyyMMddHHmm");
-//		String timeString = s.format(d);
-//		KMLReceiveFromNet kMLReceiveFromNet = new KMLReceiveFromNet();
-////		String fileName = layeridMain + "_" + timeString + ".kml";
-//		String fileName = "test1.kml";
-//		kMLReceiveFromNet.downloadKML(getURLToken, fileName);
-//		System.out.println(fileName);
+		SimpleDateFormat s = new SimpleDateFormat("yyyyMMddHHmm");
+		String timeString = s.format(d);
+		KMLReceiveFromNet kMLReceiveFromNet = new KMLReceiveFromNet();
+//		String fileName = layeridMain + "_" + timeString + ".kml";
+		String fileName = "test1.kml";
+		kMLReceiveFromNet.downloadKML(getURLToken, fileName);
+		System.out.println(fileName);
 
 		// parser
 		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
