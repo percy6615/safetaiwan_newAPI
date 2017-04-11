@@ -82,7 +82,7 @@ public class CommonTools {
 	}
 
 	public Date StringToDate(String stringDate) {
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.ENGLISH);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 		Date d = null;
 		try {
 			d = format.parse(stringDate);
@@ -123,5 +123,12 @@ public class CommonTools {
 			e.printStackTrace();
 		}
 		return timestamp;
+	}
+	
+	public String currentTime(){
+		Date d = new Date(System.currentTimeMillis());
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String timeString = s.format(d);
+		return timeString;
 	}
 }

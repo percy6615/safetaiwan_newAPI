@@ -1,6 +1,7 @@
 package safetaiwan_Parser;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,22 +19,27 @@ import safetaiwan_messageObject.DisasterNotification;
 public class DisasterNotificationParser {
 	private Kml kml;
 	private String fileName;
+	private Timestamp KMLTime;
 
 	public static void main(String[] args) {
 
 		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
 		disasterNotificationParser.setKml("test.kml");
-		List<?>  list= disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml());
+		CommonTools commonTools = new CommonTools();
+		String currentTime = commonTools.currentTime();
+		Timestamp currentTimeStamp = commonTools.StringToTimestamp(currentTime);
+		List<?> list = disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml(),
+				currentTimeStamp);
 		List<String> descriptionList = new ArrayList<String>();
-		for(int i = 0 ; i < list.size();i++){
-			String description = ((DisasterNotification)list.get(i)).getReportContent();
+		for (int i = 0; i < list.size(); i++) {
+			String description = ((DisasterNotification) list.get(i)).getReportContent();
 			System.out.println(description);
 			descriptionList.add(description);
 		}
-		
+
 	}
 
-	public  List<?> disasterNotificationParserList(Kml kml) {
+	public List<?> disasterNotificationParserList(Kml kml, Timestamp KMLTime) {
 		List<DisasterNotification> returnObject = new ArrayList<DisasterNotification>();
 		Document document = (Document) kml.getFeature();
 		List<Feature> folderList = (List<Feature>) document.getFeature();
@@ -58,16 +64,14 @@ public class DisasterNotificationParser {
 					CoordinatesPointList.add(coordinatesPoint);
 				}
 				DisasterNotification disasterNotification = new DisasterNotification(name, CoordinatesPointList,
-						description, styleUrl);
-				disasterNotification.descriptionParser(); //descript html parser to object
+						description, styleUrl, KMLTime);
+				disasterNotification.descriptionParser(); // descript html
+															// parser to object
 				returnObject.add(disasterNotification);
 			}
 		}
 		return returnObject;
 
-	}
-	public Kml getKml() {
-		return kml;
 	}
 
 	public void setKml(String fileName) {
@@ -90,5 +94,21 @@ public class DisasterNotificationParser {
 	public static int featureListSize(List<?> Listf) {
 		return Listf.size();
 	}
-	
+
+	public Kml getKml() {
+		return kml;
+	}
+
+	public Timestamp getKMLTime() {
+		return KMLTime;
+	}
+
+	public void setKMLTime(Timestamp kMLTime) {
+		this.KMLTime = kMLTime;
+	}
+
+	public void setKml(Kml kml) {
+		this.kml = kml;
+	}
+
 }

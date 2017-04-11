@@ -23,6 +23,8 @@ public class DisasterNotification {
 	private String imgURL;
 	private CommonTools commonTools = new CommonTools();
 	private String fileName;
+	private Timestamp KMLTime;
+	private int flag = 0;
 
 	public DisasterNotification() {
 		this.uuid = commonTools.generateUUID();
@@ -38,15 +40,33 @@ public class DisasterNotification {
 		this.coordinatesPoints.addAll(disasterNotification.getCoordinatesPoints());
 		this.description = disasterNotification.getDescription();
 		this.iconStyleID = disasterNotification.getIconStyleID();
+		this.KMLTime = disasterNotification.getKMLTime();
 	}
 
 	public DisasterNotification(String name, List<CoordinatesPoint> coordinatesPoint, String description,
-			String iconStyleID) {
+			String iconStyleID, Timestamp KMLTime) {
 		this.uuid = commonTools.generateUUID();
 		this.name = name;
 		this.coordinatesPoints = coordinatesPoint;
 		this.description = description;
 		this.iconStyleID = iconStyleID;
+		this.KMLTime = KMLTime;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+
+	public Timestamp getKMLTime() {
+		return KMLTime;
+	}
+
+	public void setKMLTime(Timestamp kMLTime) {
+		KMLTime = kMLTime;
 	}
 
 	public String getIconStyleID() {
@@ -133,9 +153,6 @@ public class DisasterNotification {
 			setImgURL(imgPath);
 			File f = new File(imgPath);
 			setFileName(f.getName());
-			System.out.println(imgPath);
-			System.out.println(content[0]);
-			System.out.println(content[1]);
 
 		} else if (linkNum < 2) {
 			Element e = link.get(0);
@@ -145,8 +162,7 @@ public class DisasterNotification {
 			setReportContent(recallContent);
 			setReportDate(commonTools.StringToTimestamp(splitChar[1]));
 			setImgURL(null);
-			System.out.println(recallContent);
-			System.out.println(splitChar[1]);
+
 		}
 	}
 

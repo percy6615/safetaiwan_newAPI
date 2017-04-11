@@ -15,5 +15,28 @@
 	<classpathentry kind="lib" path="libs/c3p0/c3p0-oracle-thin-extras-0.9.5.2.jar"/>
 	<classpathentry kind="lib" path="libs/c3p0/mchange-commons-java-0.2.11.jar"/>
 	<classpathentry kind="lib" path="libs/c3p0/mysql-connector-java-5.0.8.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/commons-lang3-3.5.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/cssparser-0.9.22.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/htmlunit-2.26.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/htmlunit-core-js-2.26.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/httpmime-4.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/jetty-client-9.4.3.v20170317.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/jetty-http-9.4.3.v20170317.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/jetty-io-9.4.3.v20170317.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/jetty-util-9.4.3.v20170317.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/neko-htmlunit-2.25.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/sac-1.3.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/serializer-2.7.2.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/websocket-api-9.4.3.v20170317.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/websocket-client-9.4.3.v20170317.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/websocket-common-9.4.3.v20170317.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/xalan-2.7.2.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunits/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

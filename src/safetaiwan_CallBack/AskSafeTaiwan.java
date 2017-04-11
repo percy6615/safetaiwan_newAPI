@@ -16,7 +16,7 @@ public class AskSafeTaiwan implements CallBackParser {
 	}
 
 	public void pleaseDownloadKML() {
-		System.out.println("start:" + new SimpleDateFormat("yyyy-MM-dd HH:ss:mm").format(new Date(System.currentTimeMillis())));
+		System.out.println("start:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
 
 		DownloadFile downloadFile = new DownloadFile(AskSafeTaiwan.this,"C:\\workspaceJAVA\\safetaiwan_newAPI\\resources\\exampledata\\7912_201703311125.kml");
 		this.downloadFile = downloadFile;
@@ -31,7 +31,7 @@ public class AskSafeTaiwan implements CallBackParser {
 	@Override
 	public void parser(String fileName) {
 		System.out.println(fileName);
-		System.out.println("end:" + new SimpleDateFormat("yyyy-MM-dd HH:ss:mm").format(new Date(System.currentTimeMillis())));
+		System.out.println("end:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
 	}
 
 }

@@ -23,7 +23,7 @@ public class DownloadFile implements Runnable {
 
 		double jj = 0;
 		for (int i = 0; i < 10000000; i++) {
-			for (int j = 0; j < 1000; j++) {
+			for (int j = 0; j < 7000; j++) {
 				for (int k = 0; k < 1; k++) {
 					jj++;
 				}

@@ -12,7 +12,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 
 	public void insertDisasterNotificationList(List<DisasterNotification> disasterNotification) {
 		Connection conn = getConnection();
-		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?)";
+		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(insertSQL);
@@ -28,6 +28,8 @@ public class DisasterNotificationDBfunction extends DBFunction {
 				pstmt.setTimestamp(8, disasterNotification.get(i).getReportDate());
 				pstmt.setString(9, disasterNotification.get(i).getImgURL());
 				pstmt.setString(10, disasterNotification.get(i).getFileName());
+				pstmt.setTimestamp(11, disasterNotification.get(i).getKMLTime());
+				pstmt.setInt(12, disasterNotification.get(i).getFlag());
 				pstmt.executeUpdate();
 				pstmt.clearParameters();
 			}
@@ -40,7 +42,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 
 	public void insertDisasterNotification(DisasterNotification disasterNotification) {
 		Connection conn = getConnection();
-		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?)";
+		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(insertSQL);
@@ -54,6 +56,8 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			pstmt.setTimestamp(8, disasterNotification.getReportDate());
 			pstmt.setString(9, disasterNotification.getImgURL());
 			pstmt.setString(10, disasterNotification.getFileName());
+			pstmt.setTimestamp(11, disasterNotification.getKMLTime());
+			pstmt.setInt(12, disasterNotification.getFlag());
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 
@@ -72,8 +76,8 @@ public class DisasterNotificationDBfunction extends DBFunction {
 				+ "`latitudeCoord` decimal(16,0) DEFAULT NULL, " + "`description` varchar(256) DEFAULT NULL, "
 				+ "`iconStyleID` varchar(32) DEFAULT NULL, " + "`reportContent` varchar(128) DEFAULT NULL, "
 				+ "`reportDate` timestamp(6) NULL DEFAULT NULL, " + "`imgURL` varchar(128) DEFAULT NULL, "
-				+ "`filename` varchar(64) DEFAULT NULL, " + "PRIMARY KEY (`uuid`) "
-				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8 ";
+				+ "`filename` varchar(64) DEFAULT NULL, `kmltime` timestamp(6) NULL DEFAULT NULL, `flag` int(11) DEFAULT NULL,"
+				+ "PRIMARY KEY (`uuid`) " + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 ";
 		try {
 			ResultSet r = conn.prepareStatement(selectSQL).executeQuery();
 			if (r.next()) {

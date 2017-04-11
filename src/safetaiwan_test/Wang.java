@@ -3,8 +3,6 @@ package safetaiwan_test;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.micromata.opengis.kml.v_2_2_0.SimpleData;
-
 /**
  * 这个是小王
  * @author xiaanming
