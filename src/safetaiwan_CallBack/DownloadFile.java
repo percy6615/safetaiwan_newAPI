@@ -58,7 +58,7 @@ public class DownloadFile implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		executeMessage();
+		downloadKML();
 	}
 
 }

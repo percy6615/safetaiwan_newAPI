@@ -10,22 +10,22 @@ import de.micromata.opengis.kml.v_2_2_0.SimpleData;
  * @author xiaanming
  * 实现了一个回调接口CallBack，相当于----->背景一
  */
-public class Wang implements CallBackParser {
+public class AskSafeTaiwan implements CallBackParser {
 	/**
 	 * 小李对象的引用
 	 * 相当于----->背景二
 	 */
-	private Li li; 
+	private DownloadFile downloadFile; 
 
 	/**
 	 * 小王的构造方法，持有小李的引用
 	 * @param li
 	 */
-	public Wang(){
+	public AskSafeTaiwan(){
 		
 	}
-	public Wang(Li li){
-		this.li = li;
+	public AskSafeTaiwan(DownloadFile downloadFile){
+		this.downloadFile = downloadFile;
 	}
 	
 	/**
@@ -35,9 +35,9 @@ public class Wang implements CallBackParser {
 	public void pleaseDownloadKML(){
 		System.out.println("start:"+new SimpleDateFormat("yyyy-MM-dd HH:ss:mm").format(new Date(System.currentTimeMillis())));
 		//这里用一个线程就是异步，
-		Li li = new Li(Wang.this,"C:\\workspaceJAVA\\safetaiwan_newAPI\\resources\\exampledata\\7912_201703311125.kml");
-		this.li = li;
-		new Thread(li).start();
+		DownloadFile downloadFile = new DownloadFile(AskSafeTaiwan.this,"C:\\workspaceJAVA\\safetaiwan_newAPI\\resources\\exampledata\\7912_201703311125.kml");
+		this.downloadFile = downloadFile;
+		new Thread(downloadFile).start();
 		
 		//小网问完问题挂掉电话就去干其他的事情了，诳街去了
 		play();
