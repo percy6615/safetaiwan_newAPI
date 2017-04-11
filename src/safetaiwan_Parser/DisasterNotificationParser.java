@@ -1,9 +1,14 @@
 package safetaiwan_Parser;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
 import de.micromata.opengis.kml.v_2_2_0.Document;
@@ -17,14 +22,14 @@ import safetaiwan_messageObject.CoordinatesPoint;
 import safetaiwan_messageObject.DisasterNotification;
 
 public class DisasterNotificationParser {
-	private Kml kml;
+	private Kml kml = null;
 	private String fileName;
 	private Timestamp KMLTime;
 
 	public static void main(String[] args) {
 
 		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
-		disasterNotificationParser.setKml("test.kml");
+		disasterNotificationParser.setKml("test1.kml");
 		CommonTools commonTools = new CommonTools();
 		String currentTime = commonTools.currentTime();
 		Timestamp currentTimeStamp = commonTools.StringToTimestamp(currentTime);
@@ -78,8 +83,21 @@ public class DisasterNotificationParser {
 		setFileName(fileName);
 		String filePath = CommonTools.APPLocation() + "\\resources\\exampledata\\" + getFileName();
 		File f = new File(filePath);
+//		Kml k = loadXMLFile(filePath);
 		this.kml = Kml.unmarshal(f);
+		
 	}
+	private Kml loadXMLFile(String path) {
+        Kml kml = null;
+        try {
+        	 kml = Kml.unmarshal(new File(path));
+            
+        } catch (RuntimeException ex) {
+        	kml = Kml.unmarshal(path);
+        }
+        return kml;
+    }
+	
 
 	public String getFileName() {
 		// TODO Auto-generated method stub
@@ -110,5 +128,12 @@ public class DisasterNotificationParser {
 	public void setKml(Kml kml) {
 		this.kml = kml;
 	}
-
+	
+	public static Kml getKml(InputStream is) throws Exception {
+	    String str = IOUtils.toString( is );
+	    IOUtils.closeQuietly( is );
+	    str = StringUtils.replace( str, "xmlns=\"http://earth.google.com/kml/2.2\"", "xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\"" );
+	    ByteArrayInputStream bais = new ByteArrayInputStream( str.getBytes( "UTF-8" ) );
+	    return Kml.unmarshal(bais);
+	}
 }

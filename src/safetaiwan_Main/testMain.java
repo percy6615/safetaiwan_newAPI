@@ -5,6 +5,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,10 +19,26 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import safetaiwan_CommTools.CommonTools;
 import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
+import safetaiwan_Parser.DisasterNotificationParser;
 import safetaiwan_messageObject.DisasterNotification;
 
 public class testMain {
 	public static void main(String[] args)  {
+		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
+		disasterNotificationParser.setKml("7912_201703311125.kml");
+		CommonTools commonTools = new CommonTools();
+		String currentTime = commonTools.currentTime();
+		Timestamp currentTimeStamp = commonTools.StringToTimestamp(currentTime);
+		List<?> list = disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml(),
+				currentTimeStamp);
+		List<String> descriptionList = new ArrayList<String>();
+		for (int i = 0; i < list.size(); i++) {
+			String description = ((DisasterNotification) list.get(i)).getReportContent();
+			System.out.println(description);
+			descriptionList.add(description);
+		}
+	}
+	public void db(){
 		DisasterNotificationDBfunction DisasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		DisasterNotification disasterNotification = new DisasterNotification();
 //		DisasterNotificationDBfunction.createDisasterNotification();
