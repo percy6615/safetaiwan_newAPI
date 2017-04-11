@@ -31,7 +31,7 @@ public class testMain {
 		DisasterNotificationDBfunction DisasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		DisasterNotification disasterNotification = new DisasterNotification();
 //		DisasterNotificationDBfunction.createDisasterNotification();
-		DisasterNotificationDBfunction.insertDisasterNotificationToDB(disasterNotification);
+		DisasterNotificationDBfunction.insertDisasterNotification(disasterNotification);
 	}
 	public void testpage(){
 		// capture rendered page
