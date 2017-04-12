@@ -1,14 +1,9 @@
 package safetaiwan_Parser;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
 import de.micromata.opengis.kml.v_2_2_0.Document;
@@ -26,6 +21,17 @@ public class DisasterNotificationParser {
 	private Kml kml = null;
 	private String fileName;
 	private Timestamp KMLTime;
+	private static volatile DisasterNotificationParser disasterNotificationParser;
+
+	public static DisasterNotificationParser getInstance() {
+		if (disasterNotificationParser == null) {
+			synchronized (DisasterNotificationParser.class) {
+				disasterNotificationParser = new DisasterNotificationParser();
+			}
+		}
+		return disasterNotificationParser;
+
+	}
 
 	public static void main(String[] args) {
 
@@ -77,9 +83,7 @@ public class DisasterNotificationParser {
 					boolean compare = disasterNotification.getReportDate().compareTo(tDB) > 0;
 					if (compare) {
 						returnObject.add(disasterNotification);
-						System.out.println(disasterNotification.getReportDate());
-					} else {
-
+						// System.out.println(disasterNotification.getReportDate());
 					}
 				} else {
 					returnObject.add(disasterNotification);
@@ -128,7 +132,7 @@ public class DisasterNotificationParser {
 	}
 
 	public Timestamp getDbReportTime() {
-		DisasterNotificationDBfunction d = DisasterNotificationDBfunction.getInstance();
+		DisasterNotificationDBfunction d = new DisasterNotificationDBfunction();
 		return d.getDbReportTime();
 
 	}

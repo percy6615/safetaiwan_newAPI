@@ -27,7 +27,7 @@ public class Progressbar {
             public void run() {
                 try {
 
-                    URL url = new URL("http://www.7-zip.org/a/7z1604.exe");
+                    URL url = new URL("http://www.win-rar.com/fileadmin/winrar-versions/wrar531tc.exe");
                     HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());
                     long completeFileSize = httpConnection.getContentLength();
 

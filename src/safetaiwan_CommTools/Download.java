@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import javax.net.ssl.HttpsURLConnection;
+
 // This class downloads a file from a URL.
 public class Download extends Observable implements Runnable {
 
@@ -100,6 +102,7 @@ public class Download extends Observable implements Runnable {
 
 		try {
 			// Open connection to URL.
+
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 			// Specify what portion of file to download.
@@ -110,6 +113,7 @@ public class Download extends Observable implements Runnable {
 
 			// Make sure response code is in the 200 range.
 			if (connection.getResponseCode() / 100 != 2) {
+				System.out.println(connection.getResponseCode());
 				error();
 			}
 
@@ -165,12 +169,14 @@ public class Download extends Observable implements Runnable {
 			}
 		} catch (Exception e) {
 			error();
+//			e.printStackTrace();
 		} finally {
 			// Close file.
 			if (file != null) {
 				try {
 					file.close();
 				} catch (Exception e) {
+//					e.printStackTrace();
 				}
 			}
 
@@ -179,6 +185,7 @@ public class Download extends Observable implements Runnable {
 				try {
 					stream.close();
 				} catch (Exception e) {
+//					e.printStackTrace();
 				}
 			}
 		}
