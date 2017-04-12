@@ -23,19 +23,17 @@ public class Main {
 
 		// download kml to file system
 		Date d = new Date(System.currentTimeMillis());
-		Timestamp currentTimeStamp = new Timestamp(d.getTime());
 		SimpleDateFormat s = new SimpleDateFormat("yyyyMMddHHmm");
 		String timeString = s.format(d);
 		KMLReceiveFromNet kMLReceiveFromNet = new KMLReceiveFromNet();
-//		String fileName = layeridMain + "_" + timeString + ".kml";
-		String fileName = "test1.kml";
+		String fileName = layeridMain + "_" + timeString + ".kml";
 		kMLReceiveFromNet.downloadKML(getURLToken, fileName);
 		System.out.println(fileName);
 
 		// parser
+		Timestamp currentTimeStamp = new Timestamp(d.getTime());
 		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
-//		disasterNotificationParser.setKml("7912_201703311125.kml");
-		disasterNotificationParser.setKml("7912_201704111454.kml");
+		disasterNotificationParser.setKml(fileName);
 		List<?> list = disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml(),
 				currentTimeStamp);
 		List<String> descriptionList = new ArrayList<String>();

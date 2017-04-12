@@ -1,5 +1,6 @@
 package safetaiwan_CommTools;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -39,7 +40,7 @@ public class KMLReceiveFromNet {
 		String a = null;
 		try {
 			a = formatXML(url);
-			// System.out.println(a);
+//			 System.out.println(a);
 			List<String> lines = Arrays.asList(a);
 			String s = CommonTools.APPLocation();
 			String outFilePathALL = "";
@@ -70,17 +71,22 @@ public class KMLReceiveFromNet {
 			// connection.setRequestProperty("Accept", "application/xml");
 
 			InputStream src1 = connection.getInputStream();
-			 String str = IOUtils.toString( src1 );
-			    IOUtils.closeQuietly( src1 );
-			    str = StringUtils.replace( str, "xmlns=\"http://earth.google.com/kml/2.2\"", "xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\"" );
-
+			
+			//add replace xmltitle 20170412
+//			 String str = IOUtils.toString( src1 );
+//			 IOUtils.closeQuietly( src1 );
+//			 str = StringUtils.replace( str, "xmlns:atom=\"http://www.w3.org/2005/Atom\"", "xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\"" );
+//			 str = StringUtils.replace( str, "<kml", "<kml xmlns=\"http://www.opengis.net/kml/2.2\" " );
+//			 System.out.println(str);
+//			 ByteArrayInputStream bais = new ByteArrayInputStream( str.getBytes( "UTF-8" ) );
+			 
 			// final InputSource src = new InputSource(new StringReader(xml));
 			final Node document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src1)
-					.getDocumentElement();
+					.getDocumentElement(); //modify 20170412 src1->bais
 			final Boolean keepDeclaration = Boolean.valueOf(xmlURL.startsWith("<?xml"));
 
 			// May need this:
-			// System.setProperty(DOMImplementationRegistry.PROPERTY,"com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl");
+			 System.setProperty(DOMImplementationRegistry.PROPERTY,"com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl");
 
 			final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
 			final DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
