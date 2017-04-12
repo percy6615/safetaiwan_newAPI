@@ -38,5 +38,8 @@
 	<classpathentry kind="lib" path="libs/htmlunits/xalan-2.7.2.jar"/>
 	<classpathentry kind="lib" path="libs/htmlunits/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="libs/htmlunits/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="libs/htmlunit-2.26-OSGi.jar"/>
+	<classpathentry kind="lib" path="libs/line-bot-api-client-1.6.0.jar"/>
+	<classpathentry kind="lib" path="libs/line-bot-model-1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
