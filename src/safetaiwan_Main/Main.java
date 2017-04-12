@@ -32,7 +32,7 @@ public class Main {
 
 		// parser
 		Timestamp currentTimeStamp = new Timestamp(d.getTime());
-		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
+		DisasterNotificationParser disasterNotificationParser = DisasterNotificationParser.getInstance();
 		disasterNotificationParser.setKml(fileName);
 		List<?> list = disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml(),
 				currentTimeStamp);
