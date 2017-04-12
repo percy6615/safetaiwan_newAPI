@@ -6,6 +6,7 @@ import java.util.Date;
 public class AskSafeTaiwan implements CallBackParser {
 
 	private DownloadFile downloadFile;
+	private String fileName;
 
 	public AskSafeTaiwan() {
 

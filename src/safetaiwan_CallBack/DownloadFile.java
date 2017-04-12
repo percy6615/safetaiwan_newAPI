@@ -10,8 +10,8 @@ public class DownloadFile implements Runnable {
 	CallBackParser call;
 	String fileName;
 
-	DownloadFile() {
-
+	DownloadFile(CallBackParser call) {
+		this.call = call;
 	}
 
 	DownloadFile(CallBackParser call, String fileName) {
@@ -38,7 +38,7 @@ public class DownloadFile implements Runnable {
 		String fileName = layeridMain + "_" + timeString + ".kml";
 		kMLReceiveFromNet.downloadKML(getURLToken, fileName);
 
-		call.parser(fileName);//call parser
+		call.parser(fileName);// call parser
 	}
 
 }
