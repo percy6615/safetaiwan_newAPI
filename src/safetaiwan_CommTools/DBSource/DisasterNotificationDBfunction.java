@@ -10,19 +10,19 @@ import java.util.List;
 import safetaiwan_messageObject.DisasterNotification;
 
 public class DisasterNotificationDBfunction extends DBFunction {
-	
-	
-	private static volatile  DisasterNotificationDBfunction disasterNotificationDBfunction;
+
+	private static volatile DisasterNotificationDBfunction disasterNotificationDBfunction;
 
 	public static DisasterNotificationDBfunction getInstance() {
 		if (disasterNotificationDBfunction == null) {
-			disasterNotificationDBfunction = new DisasterNotificationDBfunction();
-			return disasterNotificationDBfunction;
-		} else {
-			return disasterNotificationDBfunction;
+			synchronized (DisasterNotificationDBfunction.class) {
+				disasterNotificationDBfunction = new DisasterNotificationDBfunction();
+			}
 		}
+		return disasterNotificationDBfunction;
+
 	}
-	
+
 	public void insertDisasterNotificationList(List<DisasterNotification> disasterNotification) {
 		Connection conn = getConnection();
 		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -44,7 +44,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 				pstmt.setTimestamp(11, disasterNotification.get(i).getKMLTime());
 				pstmt.setInt(12, disasterNotification.get(i).getFlag());
 				pstmt.addBatch();
-				
+
 			}
 			pstmt.executeBatch();
 			pstmt.clearParameters();
@@ -108,16 +108,15 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	public Timestamp getDbReportTime(){
+
+	public Timestamp getDbReportTime() {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		String SQL = "select max(reportdate) as reportdate from disaster.safetaiwan_disasternotification ";
 		Timestamp t = null;
 		try {
 			ResultSet r = conn.prepareStatement(SQL).executeQuery();
-			if(r.next()) {
+			if (r.next()) {
 				t = r.getTimestamp("reportdate");
 			}
 			r.close();
@@ -125,6 +124,6 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return t;	
+		return t;
 	}
 }
