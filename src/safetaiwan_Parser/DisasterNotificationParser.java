@@ -18,6 +18,7 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Point;
 import safetaiwan_CommTools.CommonTools;
+import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
 import safetaiwan_messageObject.CoordinatesPoint;
 import safetaiwan_messageObject.DisasterNotification;
 
@@ -29,7 +30,7 @@ public class DisasterNotificationParser {
 	public static void main(String[] args) {
 
 		DisasterNotificationParser disasterNotificationParser = new DisasterNotificationParser();
-		disasterNotificationParser.setKml("test1.kml");
+		disasterNotificationParser.setKml("7912_201703311125.kml");
 		CommonTools commonTools = new CommonTools();
 		String currentTime = commonTools.currentTime();
 		Timestamp currentTimeStamp = commonTools.StringToTimestamp(currentTime);
@@ -70,9 +71,19 @@ public class DisasterNotificationParser {
 				}
 				DisasterNotification disasterNotification = new DisasterNotification(name, CoordinatesPointList,
 						description, styleUrl, KMLTime);
-				disasterNotification.descriptionParser(); // descript html
-															// parser to object
-				returnObject.add(disasterNotification);
+				disasterNotification.descriptionParser();// html to object
+				Timestamp tDB = getDbReportTime();
+				if (tDB != null) {
+					boolean compare = disasterNotification.getReportDate().compareTo(tDB) > 0;
+					if (compare) {
+						returnObject.add(disasterNotification);
+						System.out.println(disasterNotification.getReportDate());
+					} else {
+
+					}
+				} else {
+					returnObject.add(disasterNotification);
+				}
 			}
 		}
 		return returnObject;
@@ -83,21 +94,8 @@ public class DisasterNotificationParser {
 		setFileName(fileName);
 		String filePath = CommonTools.APPLocation() + "\\resources\\exampledata\\" + getFileName();
 		File f = new File(filePath);
-//		Kml k = loadXMLFile(filePath);
 		this.kml = Kml.unmarshal(f);
-		
 	}
-	private Kml loadXMLFile(String path) {
-        Kml kml = null;
-        try {
-        	 kml = Kml.unmarshal(new File(path));
-            
-        } catch (RuntimeException ex) {
-        	kml = Kml.unmarshal(path);
-        }
-        return kml;
-    }
-	
 
 	public String getFileName() {
 		// TODO Auto-generated method stub
@@ -128,12 +126,11 @@ public class DisasterNotificationParser {
 	public void setKml(Kml kml) {
 		this.kml = kml;
 	}
-	
-	public static Kml getKml(InputStream is) throws Exception {
-	    String str = IOUtils.toString( is );
-	    IOUtils.closeQuietly( is );
-	    str = StringUtils.replace( str, "xmlns=\"http://earth.google.com/kml/2.2\"", "xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\"" );
-	    ByteArrayInputStream bais = new ByteArrayInputStream( str.getBytes( "UTF-8" ) );
-	    return Kml.unmarshal(bais);
+
+	public Timestamp getDbReportTime() {
+		DisasterNotificationDBfunction d = DisasterNotificationDBfunction.getInstance();
+		return d.getDbReportTime();
+
 	}
+
 }

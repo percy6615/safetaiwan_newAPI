@@ -47,7 +47,12 @@ public class testMain {
 		// System.out.println(description);
 		// descriptionList.add(description);
 		// }
-		getKml();
+		db();
+		  Timestamp ts = new Timestamp(System.currentTimeMillis());
+	        System.out.println("ts : " + ts);    
+	        Timestamp ts2 = Timestamp.valueOf("2018-10-01 08:01:01");
+	        int compareTo = ts.compareTo(ts2);        
+	        System.out.println("compareTo : " + compareTo);
 	}
 
 	public static void getKml() {
@@ -58,7 +63,7 @@ public class testMain {
 		System.out.println(str);
 	}
 
-	public void db() {
+	public static void db() {
 		DisasterNotificationDBfunction DisasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		DisasterNotification disasterNotification = new DisasterNotification();
 		// DisasterNotificationDBfunction.createDisasterNotification();

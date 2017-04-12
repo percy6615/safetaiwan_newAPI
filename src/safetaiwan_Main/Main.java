@@ -42,6 +42,11 @@ public class Main {
 			System.out.println(description);
 			descriptionList.add(description);
 		}
+
+		// send to line
+		
+		// save to db
+
 	}
 
 }
