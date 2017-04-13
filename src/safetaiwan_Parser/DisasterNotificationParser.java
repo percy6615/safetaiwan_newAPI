@@ -56,6 +56,7 @@ public class DisasterNotificationParser {
 		Document document = (Document) kml.getFeature();
 		List<Feature> folderList = (List<Feature>) document.getFeature();
 		int folderListSize = featureListSize(folderList);
+		Timestamp tDB = getDbReportTime();
 		for (int i = 0; i < folderListSize; i++) {
 			Folder folder = (Folder) folderList.get(i);
 			List<Feature> placemarkList = (List<Feature>) folder.getFeature();
@@ -78,12 +79,10 @@ public class DisasterNotificationParser {
 				DisasterNotification disasterNotification = new DisasterNotification(name, CoordinatesPointList,
 						description, styleUrl, KMLTime);
 				disasterNotification.descriptionParser();// html to object
-				Timestamp tDB = getDbReportTime();
 				if (tDB != null) {
 					boolean compare = disasterNotification.getReportDate().compareTo(tDB) > 0;
 					if (compare) {
 						returnObject.add(disasterNotification);
-						// System.out.println(disasterNotification.getReportDate());
 					}
 				} else {
 					returnObject.add(disasterNotification);
@@ -133,7 +132,8 @@ public class DisasterNotificationParser {
 
 	public Timestamp getDbReportTime() {
 		DisasterNotificationDBfunction d = new DisasterNotificationDBfunction();
-		return d.getDbReportTime();
+		Timestamp t =d.getDbReportTime();
+		return t;
 
 	}
 

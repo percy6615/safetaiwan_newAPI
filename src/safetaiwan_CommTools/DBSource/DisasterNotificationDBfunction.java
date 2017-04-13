@@ -49,6 +49,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			pstmt.executeBatch();
 			pstmt.clearParameters();
 			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,7 +76,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			pstmt.setInt(12, disasterNotification.getFlag());
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
-
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,13 +97,15 @@ public class DisasterNotificationDBfunction extends DBFunction {
 		try {
 			ResultSet r = conn.prepareStatement(selectSQL).executeQuery();
 			if (r.next()) {
-				System.out.println(r.getInt("tf"));
+//				System.out.println(r.getInt("tf"));
 				return;
 			} else {
 				pstmt = conn.prepareStatement(createSQL);
 				pstmt.executeUpdate();
 				pstmt.clearParameters();
+				
 			}
+			conn.close();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -120,6 +123,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 				t = r.getTimestamp("reportdate");
 			}
 			r.close();
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
