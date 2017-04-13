@@ -50,6 +50,9 @@ public class AskSafeTaiwan implements CallBackParser {
 			System.out.println(description);
 			descriptionList.add(description);
 		}
+		//Image file download
+		DownloadImageFile downloadImageFile = new DownloadImageFile(list);
+		new Thread(downloadImageFile).start();;
 		//line
 		
 		//database
