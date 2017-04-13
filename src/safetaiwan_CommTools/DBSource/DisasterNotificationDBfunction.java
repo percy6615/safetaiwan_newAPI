@@ -51,7 +51,6 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			pstmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -78,7 +77,6 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			pstmt.clearParameters();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -125,7 +123,6 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			r.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return t;

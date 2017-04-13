@@ -1,8 +1,11 @@
 package safetaiwan_CallBack;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 import safetaiwan_CommTools.KMLReceiveFromNet;
 import safetaiwan_HTTPS.HttpsURLConnectionToken;
@@ -11,7 +14,8 @@ public class DownloadFile implements Runnable {
 	CallBackParser call;
 	String fileName;
 	Date d;
-
+	private String propertyPath = "resources/cfg/keyid.properties";
+	private Properties props;
 	DownloadFile(CallBackParser call, Date d) {
 		this.call = call;
 		this.d = d;
@@ -30,8 +34,15 @@ public class DownloadFile implements Runnable {
 
 	private void downloadKML() {
 		// get token url
-		int layeridMain = 7912;
-		String YourAPIKeyMain = "U7x567PAj7up//PkoAQZxC/kd5RAdGgxuEAZb5yhF4/Me5iRB4CpOF/MdK/Ed+xFvJ/cbAQZxC/k";
+		props = new Properties();
+		try {
+			props.load(new FileInputStream(this.propertyPath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int layeridMain = Integer.valueOf(props.getProperty("safetaiwan.layerid"));
+		String YourAPIKeyMain = props.getProperty("safetaiwan.token");
 		HttpsURLConnectionToken httpsURLConnectionToken = new HttpsURLConnectionToken(layeridMain, YourAPIKeyMain);
 		String getURLToken = httpsURLConnectionToken.refleshTokenUrl();
 		// download kml to file system

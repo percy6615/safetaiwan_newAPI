@@ -16,7 +16,7 @@ public class CommonDBSource implements DBSource {
 	private String passwd;
 	private ComboPooledDataSource cpds;
 	private static volatile  CommonDBSource datasource;
-
+	private static String propertyPath = "resources/cfg/jdbc.properties";
 	public static CommonDBSource getInstance() {
 		if (datasource == null) {
 			datasource = new CommonDBSource();
@@ -27,7 +27,7 @@ public class CommonDBSource implements DBSource {
 	}
 
 	public CommonDBSource() {
-		this("resources/cfg/jdbc.properties");
+		this(CommonDBSource.propertyPath);
 	}
 
 	public CommonDBSource(String configFile) {
@@ -40,11 +40,9 @@ public class CommonDBSource implements DBSource {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		url = props.getProperty("onlyfun.caterpillar.url");
 		user = props.getProperty("onlyfun.caterpillar.user");
 		passwd = props.getProperty("onlyfun.caterpillar.password");
-		// Class.forName(props.getProperty("onlyfun.caterpillar.driver"));
 
 		cpds.setJdbcUrl(url);
 		cpds.setUser(user);
@@ -66,7 +64,6 @@ public class CommonDBSource implements DBSource {
 		try {
 			return this.cpds.getConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -76,7 +73,6 @@ public class CommonDBSource implements DBSource {
 		try {
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
