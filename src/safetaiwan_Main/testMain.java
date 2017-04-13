@@ -1,22 +1,14 @@
 package safetaiwan_Main;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,11 +17,8 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-import de.micromata.opengis.kml.v_2_2_0.Kml;
 import safetaiwan_CommTools.CommonTools;
-import safetaiwan_CommTools.Download;
 import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
-import safetaiwan_Parser.DisasterNotificationParser;
 import safetaiwan_messageObject.DisasterNotification;
 
 public class testMain {
@@ -52,17 +41,7 @@ public class testMain {
 		// descriptionList.add(description);
 		// }
 //		db();
-		try {
-			URL u = new URL("http://www.win-rar.com/fileadmin/winrar-versions/wrar531tc.exe");
-//			URL u = new URL("http://www.7-zip.org/a/7z1604.exe");
-			
-			Download d = new Download(u);
-			Thread t = new Thread(d);
-			t.start();
-		} catch (MalformedURLException  e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		  Timestamp ts = new Timestamp(System.currentTimeMillis());
 	        System.out.println("ts : " + ts);    
 	        Timestamp ts2 = Timestamp.valueOf("2018-10-01 08:01:01");
