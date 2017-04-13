@@ -41,7 +41,7 @@ public class HttpsURLConnectionToken {
 			con.setRequestProperty("User-Agent", USER_AGENT_ver1);
 
 			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + url);
+			System.out.println("Sending 'GET' request to URL : " + url);
 			System.out.println("Response Code : " + responseCode);
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
