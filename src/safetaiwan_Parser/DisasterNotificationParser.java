@@ -95,7 +95,7 @@ public class DisasterNotificationParser {
 
 	public void setKml(String fileName) {
 		setFileName(fileName);
-		String filePath = CommonTools.APPLocation() + "\\resources\\exampledata\\" + getFileName();
+		String filePath = CommonTools.APPLocation() + "\\resources\\kml\\" + getFileName();
 		File f = new File(filePath);
 		this.kml = Kml.unmarshal(f);
 	}

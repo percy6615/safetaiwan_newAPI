@@ -45,9 +45,9 @@ public class KMLReceiveFromNet {
 			String s = CommonTools.APPLocation();
 			String outFilePathALL = "";
 			if (outFilePath.equals("") || outFilePath == null) {
-				outFilePathALL = s + "/resources/exampledata/underwater.kml";
+				outFilePathALL = s + "/resources/kml/underwater.kml";
 			} else {
-				outFilePathALL = s + "/resources/exampledata/" + outFilePath;
+				outFilePathALL = s + "/resources/kml/" + outFilePath;
 			}
 			Path file = Paths.get(outFilePathALL);
 			Files.write(file, lines, Charset.forName("UTF-8"));

@@ -102,7 +102,7 @@ public class testMain {
 		System.out.println(ddd);
 
 		String s = CommonTools.APPLocation();
-		String outFilePathALL = s + "/resources/exampledata/" + "1.txt";
+		String outFilePathALL = s + "/resources/kml/" + "1.txt";
 		Path file = Paths.get(outFilePathALL);
 
 		List<String> lines = Arrays.asList(ddd);
