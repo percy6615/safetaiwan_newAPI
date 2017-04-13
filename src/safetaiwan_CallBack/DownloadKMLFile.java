@@ -10,18 +10,18 @@ import java.util.Properties;
 import safetaiwan_CommTools.KMLReceiveFromNet;
 import safetaiwan_HTTPS.HttpsURLConnectionToken;
 
-public class DownloadFile implements Runnable {
+public class DownloadKMLFile implements Runnable {
 	CallBackParser call;
 	String fileName;
 	Date d;
 	private String propertyPath = "resources/cfg/keyid.properties";
 	private Properties props;
-	DownloadFile(CallBackParser call, Date d) {
+	DownloadKMLFile(CallBackParser call, Date d) {
 		this.call = call;
 		this.d = d;
 	}
 
-	DownloadFile(CallBackParser call, String fileName, Date d) {
+	DownloadKMLFile(CallBackParser call, String fileName, Date d) {
 		this.call = call;
 		this.fileName = fileName;
 		this.d = d;

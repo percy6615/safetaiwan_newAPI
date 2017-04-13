@@ -12,20 +12,20 @@ import safetaiwan_messageObject.DisasterNotification;
 
 public class AskSafeTaiwan implements CallBackParser {
 
-	private DownloadFile downloadFile;
+	private DownloadKMLFile downloadFile;
 	private String fileName;
 
 	public AskSafeTaiwan() {
 
 	}
 
-	public AskSafeTaiwan(DownloadFile downloadFile) {
+	public AskSafeTaiwan(DownloadKMLFile downloadFile) {
 		this.downloadFile = downloadFile;
 	}
 
 	public void pleaseDownloadKML(Date d) {
 		System.out.println("start:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(d));
-		DownloadFile downloadFile = new DownloadFile(AskSafeTaiwan.this, d);
+		DownloadKMLFile downloadFile = new DownloadKMLFile(AskSafeTaiwan.this, d);
 		this.downloadFile = downloadFile;
 		new Thread(downloadFile).start();
 		toDoSomething();
@@ -58,6 +58,11 @@ public class AskSafeTaiwan implements CallBackParser {
 		
 		System.out.println(
 				"end:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
+	}
+	private List<String> sendMessage(List<DisasterNotification> listParser){
+		
+		return null;
+		
 	}
 
 }
