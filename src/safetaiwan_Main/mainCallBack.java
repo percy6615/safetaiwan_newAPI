@@ -1,8 +1,10 @@
-package safetaiwan_CallBack;
+package safetaiwan_Main;
 
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import safetaiwan_CallBack.AskSafeTaiwan;
 
 public class mainCallBack {
 

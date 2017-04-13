@@ -8,7 +8,7 @@ import java.util.Date;
  * @author xiaanming
  * 实现了一个回调接口CallBack，相当于----->背景一
  */
-public class Wang implements CallBackParser {
+public class Wang implements CallBack {
 	/**
 	 * 小李对象的引用
 	 * 相当于----->背景二

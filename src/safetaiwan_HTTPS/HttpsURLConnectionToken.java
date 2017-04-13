@@ -12,19 +12,13 @@ public class HttpsURLConnectionToken {
 
 	final static String stAPIUrl = "https://www.safetaiwan.tw/api2d/api/";
 	private String YourAPIKey = "U7x567PAj7up//PkoAQZxC/kd5RAdGgxuEAZb5yhF4/Me5iRB4CpOF/MdK/Ed+xFvJ/cbAQZxC/k";
-	private final  String USER_AGENT = "Mozilla/5.0";
+//	private final  String USER_AGENT = "Mozilla/5.0";
 	private String curlOptMain = stAPIUrl + "?apikey=" + YourAPIKey;
 	private int layerid = 7912;
 	String token = "";
 	String tokenUrl = stAPIUrl + "?layerid=" + layerid + "&token=" + token;
 	private final static String USER_AGENT_ver1 = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36";
 
-//	public static void main(String[] args) {
-//		int layeridMain = 7912;
-//		String YourAPIKeyMain = "U7x567PAj7up//PkoAQZxC/kd5RAdGgxuEAZb5yhF4/Me5iRB4CpOF/MdK/Ed+xFvJ/cbAQZxC/k";
-//		HttpsURLConnectionToken httpsURLConnectionToken = new HttpsURLConnectionToken(layeridMain,YourAPIKeyMain);
-//		System.out.println(httpsURLConnectionToken.refleshTokenUrl());
-//	}
 	public HttpsURLConnectionToken(int layerid,String YourAPIKey){
 		this.layerid = layerid;
 		this.YourAPIKey = YourAPIKey;
@@ -91,4 +85,10 @@ public class HttpsURLConnectionToken {
 	public void setToken(String token) {
 		this.token = token;
 	}
+//	public static void main(String[] args) {
+//	int layeridMain = 7912;
+//	String YourAPIKeyMain = "U7x567PAj7up//PkoAQZxC/kd5RAdGgxuEAZb5yhF4/Me5iRB4CpOF/MdK/Ed+xFvJ/cbAQZxC/k";
+//	HttpsURLConnectionToken httpsURLConnectionToken = new HttpsURLConnectionToken(layeridMain,YourAPIKeyMain);
+//	System.out.println(httpsURLConnectionToken.refleshTokenUrl());
+//}
 }

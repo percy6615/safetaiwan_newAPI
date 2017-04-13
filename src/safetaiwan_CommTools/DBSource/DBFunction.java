@@ -10,9 +10,4 @@ public class DBFunction {
 		Connection conn = CDBS.getConnection();
 		return conn;
 	}
-
-	public void SQLToDB(String sql) {
-
-	}
-
 }

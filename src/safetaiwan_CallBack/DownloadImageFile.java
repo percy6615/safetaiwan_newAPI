@@ -26,67 +26,7 @@ public class DownloadImageFile implements Runnable {
 		this.image = image;
 	}
 
-	public static void main(String[] args) {
-		
-		String[] urlString = {
-				"http://link.safetaiwan.tw/mobile_app/report/pictures/20170413121213_357220077438888.jpg",
-				"http://link.safetaiwan.tw/mobile_app/report/pictures/20170413104315_352738080071540.jpg" };
-		URL u = null;
-		
-		int i = 0;
-		while (i < urlString.length) {
-			try {
-				int size = -1;
-				int downloaded = 0;
-				u = new URL(urlString[i]);
-				HttpURLConnection connection = (HttpURLConnection) u.openConnection();
-				connection.setRequestProperty("Range", "bytes=" + downloaded + "-");
-				connection.connect();
-				// Make sure response code is in the 200 range.
-				if (connection.getResponseCode() / 100 != 2) {
-					System.out.println(connection.getResponseCode());
-					// error();
-				} // Check for valid content length.
-				int contentLength = connection.getContentLength();
-				if (contentLength < 1) {
-					// error();
-				}
-				if (size == -1) {
-					size = contentLength;
-				}
-				RandomAccessFile file = new RandomAccessFile(getFileNameSavePath(u), "rw");
-				file.seek(downloaded);
-				InputStream stream = connection.getInputStream();
-				while (true) {
-					/*
-					 * Size buffer according to how much of the file is left to
-					 * download.
-					 */
-					byte buffer[];
-					if (size - downloaded > MAX_BUFFER_SIZE) {
-						buffer = new byte[MAX_BUFFER_SIZE];
-					} else {
-						buffer = new byte[size - downloaded];
-					}
 
-					// Read from server into buffer.
-					int read = stream.read(buffer);
-					if (read == -1)
-						break;
-
-					// Write buffer to file.
-					file.write(buffer, 0, read);
-					downloaded += read;
-				}
-				file.close();
-				stream.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			i++;
-		}
-	}
 
 	@Override
 	public void run() {
