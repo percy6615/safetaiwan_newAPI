@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
 import safetaiwan_Parser.DisasterNotificationParser;
 import safetaiwan_messageObject.DisasterNotification;
 
@@ -40,14 +41,21 @@ public class AskSafeTaiwan implements CallBackParser {
 		// parser
 		DisasterNotificationParser disasterNotificationParser = DisasterNotificationParser.getInstance();
 		disasterNotificationParser.setKml(fileName);
-		List<?> list = disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml(),
+		List<DisasterNotification> list = disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml(),
 				timestamp);
+		//print look
 		List<String> descriptionList = new ArrayList<String>();
 		for (int i = 0; i < list.size(); i++) {
 			String description = ((DisasterNotification) list.get(i)).getReportContent();
 			System.out.println(description);
 			descriptionList.add(description);
 		}
+		//line
+		
+		//database
+		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
+		disasterNotificationDBfunction.insertDisasterNotificationList(list);
+		
 		System.out.println(
 				"end:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
 	}

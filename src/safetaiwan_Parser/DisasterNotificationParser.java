@@ -51,7 +51,7 @@ public class DisasterNotificationParser {
 
 	}
 
-	public List<?> disasterNotificationParserList(Kml kml, Timestamp KMLTime) {
+	public List<DisasterNotification> disasterNotificationParserList(Kml kml, Timestamp KMLTime) {
 		List<DisasterNotification> returnObject = new ArrayList<DisasterNotification>();
 		Document document = (Document) kml.getFeature();
 		List<Feature> folderList = (List<Feature>) document.getFeature();
