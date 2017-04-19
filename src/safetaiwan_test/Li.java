@@ -7,14 +7,14 @@ package safetaiwan_test;
  *
  */
 public class Li implements Runnable {
-	CallBackParser call;
+	CallBack call;
 	String fileName;
 
 	Li() {
 
 	}
 
-	Li(CallBackParser call, String fileName) {
+	Li(CallBack call, String fileName) {
 		this.call = call;
 		this.fileName = fileName;
 	}

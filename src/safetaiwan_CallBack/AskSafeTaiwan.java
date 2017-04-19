@@ -47,7 +47,8 @@ public class AskSafeTaiwan implements CallBackParser {
 		List<String> descriptionList = new ArrayList<String>();
 		for (int i = 0; i < list.size(); i++) {
 			String description = ((DisasterNotification) list.get(i)).getReportContent();
-			System.out.println(description);
+			System.out.println(list.get(i).getName()+" "+description+list.get(i).getCoordinatesPoints().get(0).getLatitudeCoord()+","+description+list.get(i).getCoordinatesPoints().get(0).getLongitudeCoord());
+			
 			descriptionList.add(description);
 		}
 		//Image file download
