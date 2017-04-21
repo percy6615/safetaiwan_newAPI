@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
+import safetaiwan_LineMessage.LineHttps;
 import safetaiwan_Parser.DisasterNotificationParser;
 import safetaiwan_messageObject.DisasterNotification;
 
@@ -41,32 +42,60 @@ public class AskSafeTaiwan implements CallBackParser {
 		// parser
 		DisasterNotificationParser disasterNotificationParser = DisasterNotificationParser.getInstance();
 		disasterNotificationParser.setKml(fileName);
-		List<DisasterNotification> list = disasterNotificationParser.disasterNotificationParserList(disasterNotificationParser.getKml(),
-				timestamp);
-		//print look
+		List<DisasterNotification> list = disasterNotificationParser
+				.disasterNotificationParserList(disasterNotificationParser.getKml(), timestamp);
+		// database
+		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
+		disasterNotificationDBfunction.insertDisasterNotificationList(list);
+
+		// print look
 		List<String> descriptionList = new ArrayList<String>();
 		for (int i = 0; i < list.size(); i++) {
 			String description = ((DisasterNotification) list.get(i)).getReportContent();
-			System.out.println(list.get(i).getName()+" "+description+list.get(i).getCoordinatesPoints().get(0).getLatitudeCoord()+","+description+list.get(i).getCoordinatesPoints().get(0).getLongitudeCoord());
-			
+			System.out.println(list.get(i).getName() + " " + description
+					+ list.get(i).getCoordinatesPoints().get(0).getLatitudeCoord() + "," + description
+					+ list.get(i).getCoordinatesPoints().get(0).getLongitudeCoord());
 			descriptionList.add(description);
 		}
-		//Image file download
+		// Image file download
 		DownloadImageFile downloadImageFile = new DownloadImageFile(list);
-		new Thread(downloadImageFile).start();;
-		//line
-		
-		//database
-		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
-		disasterNotificationDBfunction.insertDisasterNotificationList(list);
-		
+		new Thread(downloadImageFile).start();
+		// line
+		List<String> useridList=disasterNotificationDBfunction.selectUserId();
+		sendMessage(list,useridList);
 		System.out.println(
 				"end:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
 	}
-	private List<String> sendMessage(List<DisasterNotification> listParser){
-		
-		return null;
-		
+
+	private void sendMessage(List<DisasterNotification> listParser,List<String> useridList) {
+		LineHttps lineHttps = new LineHttps();
+		for(int i = 0 , iend = listParser.size();i<iend;i++){
+			String jsonContent = "{ \"to\":["+connectUserid(useridList)+"], \"messages\":[{\"type\":\"text\", \"text\":\""+textContent(listParser.get(i))+"\"}]}";
+			lineHttps.sendGetReturnToken(lineHttps.lineurl,jsonContent);
+		}
+//		
 	}
 
+
+	private String connectUserid(List<String> useridList){
+		String returnString = "";
+		if(useridList.size() != 0){
+			 returnString = "\"";
+		}
+		for(int i = 0 , iend = useridList.size();i<iend;i++){
+			if(i==iend-1){
+				returnString = returnString+useridList.get(i)+"\"";
+			}else{
+				returnString = returnString+useridList.get(i)+"\",\"";
+			}
+			
+		}
+		
+		return returnString;
+		
+	}
+	public static String textContent(DisasterNotification listParser){
+		String returnString= "回報時間 : "+new SimpleDateFormat("MM/dd HH:mm:ss").format(listParser.getReportDate())+",<br/>回報姓名 : "+ listParser.getName()+",<br/>回報內容 : "+listParser.getReportContent();
+		return returnString;
+	}
 }

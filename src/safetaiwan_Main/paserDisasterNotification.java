@@ -2,14 +2,49 @@ package safetaiwan_Main;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
+import safetaiwan_messageObject.DisasterNotification;
 
 public class paserDisasterNotification {
 
 	public static void main(String[] args) {
+		List<String> useridList = new ArrayList<String>();
+		useridList.add("a");
+		useridList.add("b");
+		;
+//		String jsonContent = "{ \"to\":["+connectUserid(useridList)+"], \"message\":[{\"type\":\"text\", \"text\":\""+textContent()+"\"}]}";
+//		System.out.println(jsonContent);;
+	}
+	public static String connectUserid(List<String> useridList){
+		String returnString = "";
+		if(useridList.size() != 0){
+			 returnString = "\"";
+		}
+		
+		for(int i = 0 , iend = useridList.size();i<iend;i++){
+			
+			if(i==iend-1){
+				returnString = returnString+useridList.get(i)+"\"";
+			}else{
+				returnString = returnString+useridList.get(i)+"\",\"";
+			}
+			
+		}		
+		return returnString;	
+	}
+	
+	public static String textContent(DisasterNotification listParser){
+		String returnString= "回報時間 : "+new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(listParser.getReportDate())+"\n回報姓名 : "+ listParser.getName()+"\n回報內容 : "+listParser.getReportContent();
+		return returnString;
+	}
+	public static void parserhtml(){
 //		Kml kml = Kml.unmarshal(new File("D:\\workspace_all\\workspaceline\\pasertmp\\resources\\kml\\test.kml"));
 //		de.micromata.opengis.kml.v_2_2_0.Document document = (de.micromata.opengis.kml.v_2_2_0.Document) kml
 //				.getFeature();

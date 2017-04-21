@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import safetaiwan_messageObject.DisasterNotification;
@@ -126,5 +127,22 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			e.printStackTrace();
 		}
 		return t;
+	}
+	public List<String> selectUserId(){
+		Connection conn = getConnection();
+		String SQL = "select distinct senderid from disaster.linemessage_userinfo ";
+		List<String> userid = new ArrayList<String>();
+		try {
+			ResultSet r = conn.prepareStatement(SQL).executeQuery();
+			
+			while (r.next()) {
+				userid.add(r.getString("senderid"));
+			}
+			r.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userid;
 	}
 }

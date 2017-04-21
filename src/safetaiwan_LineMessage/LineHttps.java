@@ -14,12 +14,15 @@ import safetaiwan_CommTools.CommonTools;
 public class LineHttps {
 	private final static String USER_AGENT = "Mozilla/5.0";
 //	static String lineurl = "https://api.line.me/v2/bot/message/push";
-	static String lineurl = "https://safetaiwan.herokuapp.com/callback";
-
+	public static String lineurl = "https://api.line.me/v2/bot/message/multicast";
+//	static String lineurl = "https://safetaiwan.herokuapp.com/callback";
+//	static String replyBody = String.format("{\"to\":\"%s\", \"messages\":[{\"type\":\"text\", \"text\":\"line bot send\"}]}", "Uc7a46420c8125d4fcaa0312f2d47dc10");
+//	static String replyBody = "{ \"to\":[\"Udd25c6f918b51a3840dff50eea1cf3af\",\"U314f428f4da380de2b4d21f6902dfb17\"], \"message\":[{\"type\":\"text\", \"text\":\"回報時間 : 04/18/2017 14:01:40回報姓名 : 洪鎮鉉回報內容 : 上課(測試中)\"}]}";
+	static String replyBody = "{ \"to\":[\"Udd25c6f918b51a3840dff50eea1cf3af\"], \"messages\":[{\"type\":\"text\", \"text\":\"line bot send\"}]}";
 	public static void main(String[] args) {
-		sendGetReturnToken(lineurl);
+		sendGetReturnToken(lineurl,replyBody);
 	}
-	private static String sendGetReturnToken(String url) {
+	public static String sendGetReturnToken(String url,String replyBody) {
 		String token = "pslrmKmSM30059ArgBD2wv4Sm6zRbyjqpdrYIHFZbtGZmqO76wuOBV5p2+re039F7umgZptlue+RUiv+k38Oin6v1DIt5wfS8myZ1Xw3h7RPRDczDJgakudp0I8EheQ+VLE77SiMvDtMGUxcg7nvXAdB04t89/1O/w1cDnyilFU=";
 		CommonTools commonTools = new CommonTools();
 		HttpsURLConnection con = commonTools.SSLHttpConnection(url);
@@ -29,7 +32,7 @@ public class LineHttps {
 
 			String yourid = "Uc7a46420c8125d4fcaa0312f2d47dc10";
 
-			String replyBody = String.format("{\"to\":\"%s\", \"messages\":[{\"type\":\"text\", \"text\":\"line bot send\"}]}", yourid);
+//			String replyBody = String.format("{\"to\":\"%s\", \"messages\":[{\"type\":\"text\", \"text\":\"line bot send\"}]}", yourid);
 
 			// add request header
 
