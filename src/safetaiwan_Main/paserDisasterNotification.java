@@ -21,6 +21,7 @@ public class paserDisasterNotification {
 		;
 //		String jsonContent = "{ \"to\":["+connectUserid(useridList)+"], \"message\":[{\"type\":\"text\", \"text\":\""+textContent()+"\"}]}";
 //		System.out.println(jsonContent);;
+		
 	}
 	public static String connectUserid(List<String> useridList){
 		String returnString = "";

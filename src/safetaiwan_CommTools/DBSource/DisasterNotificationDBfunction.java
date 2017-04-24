@@ -114,7 +114,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 	public Timestamp getDbReportTime() {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		String SQL = "select max(reportdate) as reportdate from disaster.safetaiwan_disasternotification ";
+		String SQL = "select max(reportdate) as reportdate from safetaiwan_disasternotification ";
 		Timestamp t = null;
 		try {
 			ResultSet r = conn.prepareStatement(SQL).executeQuery();
@@ -130,7 +130,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 	}
 	public List<String> selectUserId(){
 		Connection conn = getConnection();
-		String SQL = "select distinct senderid from disaster.linemessage_userinfo ";
+		String SQL = "select distinct senderid from linemessage_userinfo ";
 		List<String> userid = new ArrayList<String>();
 		try {
 			ResultSet r = conn.prepareStatement(SQL).executeQuery();

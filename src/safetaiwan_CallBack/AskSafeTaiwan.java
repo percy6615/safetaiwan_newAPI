@@ -71,7 +71,7 @@ public class AskSafeTaiwan implements CallBackParser {
 		LineHttps lineHttps = new LineHttps();
 		for(int i = 0 , iend = listParser.size();i<iend;i++){
 			String jsonContent = "{ \"to\":["+connectUserid(useridList)+"], \"messages\":[{\"type\":\"text\", \"text\":\""+textContent(listParser.get(i))+"\"}]}";
-			lineHttps.sendGetReturnToken(lineHttps.lineurl,jsonContent);
+			lineHttps.sendPOSTReturnToken(LineHttps.lineurl,jsonContent);
 		}
 //		
 	}
@@ -95,7 +95,7 @@ public class AskSafeTaiwan implements CallBackParser {
 		
 	}
 	public static String textContent(DisasterNotification listParser){
-		String returnString= "回報時間 : "+new SimpleDateFormat("MM/dd HH:mm:ss").format(listParser.getReportDate())+",<br/>回報姓名 : "+ listParser.getName()+",<br/>回報內容 : "+listParser.getReportContent();
+		String returnString= "回報時間 : "+new SimpleDateFormat("YYYY/MM/dd HH:mm").format(listParser.getReportDate())+",\\n回報姓名 : "+ listParser.getName()+",\\n回報內容 : "+listParser.getReportContent();
 		return returnString;
 	}
 }
