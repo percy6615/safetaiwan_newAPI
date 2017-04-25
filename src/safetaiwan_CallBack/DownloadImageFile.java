@@ -95,7 +95,8 @@ public class DownloadImageFile implements Runnable {
 
 	private static String getFileNameSavePath(URL url) {
 		String fileName = url.getFile();
-		String path = CommonTools.APPLocation()+ "/resources/img/" +fileName.substring(fileName.lastIndexOf('/') + 1);
-		return path;
+//		String path = CommonTools.APPLocation()+ "/resources/img/" +fileName.substring(fileName.lastIndexOf('/') + 1);
+		String webPath = "C:\\inetpub\\wwwroot\\img\\"+fileName.substring(fileName.lastIndexOf('/') + 1);
+		return webPath;
 	}
 }

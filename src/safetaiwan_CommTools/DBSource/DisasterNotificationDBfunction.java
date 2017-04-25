@@ -130,7 +130,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 	}
 	public List<String> selectUserId(){
 		Connection conn = getConnection();
-		String SQL = "select distinct senderid from linemessage_userinfo ";
+		String SQL = "select distinct senderid from linemessage_userid ";
 		List<String> userid = new ArrayList<String>();
 		try {
 			ResultSet r = conn.prepareStatement(SQL).executeQuery();

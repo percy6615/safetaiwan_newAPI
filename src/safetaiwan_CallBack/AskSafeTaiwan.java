@@ -9,13 +9,15 @@ import java.util.List;
 import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
 import safetaiwan_LineMessage.LineHttps;
 import safetaiwan_Parser.DisasterNotificationParser;
+import safetaiwan_messageObject.CoordinatesPoint;
 import safetaiwan_messageObject.DisasterNotification;
 
 public class AskSafeTaiwan implements CallBackParser {
 
 	private DownloadKMLFile downloadFile;
 	private String fileName;
-
+	private String hostUrl = "https://b1c85ce8.ngrok.io//";
+	private String zoom = "17";
 	public AskSafeTaiwan() {
 
 	}
@@ -70,8 +72,19 @@ public class AskSafeTaiwan implements CallBackParser {
 	private void sendMessage(List<DisasterNotification> listParser,List<String> useridList) {
 		LineHttps lineHttps = new LineHttps();
 		for(int i = 0 , iend = listParser.size();i<iend;i++){
-			String jsonContent = "{ \"to\":["+connectUserid(useridList)+"], \"messages\":[{\"type\":\"text\", \"text\":\""+textContent(listParser.get(i))+"\"}]}";
-			lineHttps.sendPOSTReturnToken(LineHttps.lineurl,jsonContent);
+			DisasterNotification disasterNotification =  listParser.get(i);
+			String f = disasterNotification.getFileName();
+			String jsonContent = "";
+
+			if(f != null){
+				jsonContent = "{ \"to\":["+connectUserid(useridList)+"],"
+						+ " \"messages\":[ {\"type\":\"text\", \"text\":\""+textContent(disasterNotification)+"\\n\"}, "
+											+ " { \"type\":\"image\",\"originalContentUrl\":\""+imageUrl(f)+"\",\"previewImageUrl\": \""+imageUrl(f)+"\" } ]}";
+
+			}else{
+				jsonContent = "{ \"to\":["+connectUserid(useridList)+"], \"messages\":[{\"type\":\"text\", \"text\":\""+textContent(disasterNotification)+"\"}]}";
+			}
+						lineHttps.sendPOSTReturnToken(LineHttps.lineurl,jsonContent);
 		}
 //		
 	}
@@ -94,8 +107,27 @@ public class AskSafeTaiwan implements CallBackParser {
 		return returnString;
 		
 	}
-	public static String textContent(DisasterNotification listParser){
-		String returnString= "回報時間 : "+new SimpleDateFormat("YYYY/MM/dd HH:mm").format(listParser.getReportDate())+",\\n回報姓名 : "+ listParser.getName()+",\\n回報內容 : "+listParser.getReportContent();
+	public  String textContent(DisasterNotification listParser){
+		CoordinatesPoint coordinatesPoints = listParser.getCoordinatesPoints().get(0);
+		String c = String.valueOf(coordinatesPoints.getLatitudeCoord());
+		String l = String.valueOf(coordinatesPoints.getLongitudeCoord());
+		String returnString= "回報時間 : "+new SimpleDateFormat("YYYY/MM/dd HH:mm").format(listParser.getReportDate())
+							+"\\n回報姓名 : "+ listParser.getName()
+							+"\\n回報內容 : "+listParser.getReportContent()
+							+"\\n回報地點 : "+googleMapUrl(c,l,this.zoom);
 		return returnString;
 	}
+	
+	private  String imageUrl(String imageFileName){
+		String url = hostUrl+"img//" + imageFileName;
+		return url;
+		
+	}
+	
+	private String googleMapUrl(String lat,String lng,String zoom){
+		String url = hostUrl+"googlemapfile.html?"+"lat="+lat+"&lng="+lng+"&zoom="+zoom;
+		return url;
+		
+	}
+	
 }
