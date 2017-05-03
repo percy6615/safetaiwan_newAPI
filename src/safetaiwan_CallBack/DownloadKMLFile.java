@@ -51,7 +51,9 @@ public class DownloadKMLFile implements Runnable {
 		String timeString = s.format(d);
 		KMLReceiveFromNet kMLReceiveFromNet = new KMLReceiveFromNet();
 		String fileName = layeridMain + "_" + timeString + ".kml";
-		kMLReceiveFromNet.downloadKML(getURLToken, fileName);
+		String KMLsaveToWeb = "125.kml";
+		kMLReceiveFromNet.downloadKML(getURLToken, fileName,false);
+		kMLReceiveFromNet.downloadKML(getURLToken, KMLsaveToWeb,true);
 		call.parser(fileName, timestamp);// call parser
 	}
 

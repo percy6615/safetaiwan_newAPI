@@ -27,7 +27,7 @@ public class Main {
 		String timeString = s.format(d);
 		KMLReceiveFromNet kMLReceiveFromNet = new KMLReceiveFromNet();
 		String fileName = layeridMain + "_" + timeString + ".kml";
-		kMLReceiveFromNet.downloadKML(getURLToken, fileName);
+		kMLReceiveFromNet.downloadKML(getURLToken, fileName,false);
 		System.out.println(fileName);
 
 		// parser

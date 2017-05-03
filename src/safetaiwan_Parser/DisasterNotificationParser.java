@@ -65,6 +65,7 @@ public class DisasterNotificationParser {
 				Placemark placemark = (Placemark) placemarkList.get(j);
 				String name = placemark.getName();
 				String description = placemark.getDescription();
+//				System.out.println("description"+description);
 				String styleUrl = placemark.getStyleUrl();
 				Point geometry = (Point) placemark.getGeometry();
 				List<Coordinate> pointList = (List<Coordinate>) geometry.getCoordinates();
@@ -76,6 +77,7 @@ public class DisasterNotificationParser {
 					coordinatesPoint.setLongitudeCoord(pointList.get(k).getLongitude());
 					CoordinatesPointList.add(coordinatesPoint);
 				}
+				
 				DisasterNotification disasterNotification = new DisasterNotification(name, CoordinatesPointList,
 						description, styleUrl, KMLTime);
 				disasterNotification.descriptionParser();// html to object

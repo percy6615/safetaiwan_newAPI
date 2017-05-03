@@ -1,5 +1,7 @@
 package safetaiwan_CommTools;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -12,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
@@ -101,18 +104,17 @@ public class CommonTools {
 		return dateString;
 	}
 
-	public  Timestamp StringToTimestamp(String something) {
+	public Timestamp StringToTimestamp(String something) {
 
 		SimpleDateFormat dateFormat = null;
 		if (something.contains(".")) {
 			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-		}
-		else if (something.contains(",")) {
+		} else if (something.contains(",")) {
 			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss,SSS");
-		}else{
+		} else {
 			dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		}
-		
+
 		Timestamp timestamp = null;
 		Date parsedDate;
 		try {
@@ -124,11 +126,23 @@ public class CommonTools {
 		}
 		return timestamp;
 	}
-	
-	public String currentTime(){
+
+	public String currentTime() {
 		Date d = new Date(System.currentTimeMillis());
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String timeString = s.format(d);
 		return timeString;
+	}
+
+	public Properties getProperties(String fileName)   {
+		Properties props = new Properties();
+		try {
+			props.load(new FileInputStream(fileName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return props;
+
 	}
 }

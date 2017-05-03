@@ -1,11 +1,14 @@
 package safetaiwan_CallBack;
 
+import java.io.FileInputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
+import safetaiwan_CommTools.CommonTools;
 import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
 import safetaiwan_LineMessage.LineHttps;
 import safetaiwan_Parser.DisasterNotificationParser;
@@ -16,15 +19,20 @@ public class AskSafeTaiwan implements CallBackParser {
 
 	private DownloadKMLFile downloadFile;
 	private String fileName;
-	private String hostUrl = "https://b1c85ce8.ngrok.io//";
+	private Properties props = null;
+	private String hostUrl = "https://bba60fcf.ngrok.io//";
+	private String googlehostUrl = "http://60.250.226.78:29";
 	private String zoom = "17";
+	private String propertyfile =  "resources/cfg/jdbc.properties";
 	public AskSafeTaiwan() {
-
+		CommonTools commonTools= new CommonTools();
+		props = commonTools.getProperties(propertyfile);
 	}
 
-	public AskSafeTaiwan(DownloadKMLFile downloadFile) {
-		this.downloadFile = downloadFile;
-	}
+	// public AskSafeTaiwan(DownloadKMLFile downloadFile) {
+	// this.downloadFile = downloadFile;
+	//
+	// }
 
 	public void pleaseDownloadKML(Date d) {
 		System.out.println("start:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(d));
@@ -46,7 +54,7 @@ public class AskSafeTaiwan implements CallBackParser {
 		disasterNotificationParser.setKml(fileName);
 		List<DisasterNotification> list = disasterNotificationParser
 				.disasterNotificationParserList(disasterNotificationParser.getKml(), timestamp);
-		// database
+		// database insert
 		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		disasterNotificationDBfunction.insertDisasterNotificationList(list);
 
@@ -63,71 +71,82 @@ public class AskSafeTaiwan implements CallBackParser {
 		DownloadImageFile downloadImageFile = new DownloadImageFile(list);
 		new Thread(downloadImageFile).start();
 		// line
-		List<String> useridList=disasterNotificationDBfunction.selectUserId();
-		sendMessage(list,useridList);
+		List<String> useridList = disasterNotificationDBfunction.selectUserId();
+		sendMessage(list, useridList);
 		System.out.println(
 				"end:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
 	}
 
-	private void sendMessage(List<DisasterNotification> listParser,List<String> useridList) {
+	private void sendMessage(List<DisasterNotification> listParser, List<String> useridList) {
 		LineHttps lineHttps = new LineHttps();
-		for(int i = 0 , iend = listParser.size();i<iend;i++){
-			DisasterNotification disasterNotification =  listParser.get(i);
+		for (int i = 0, iend = listParser.size(); i < iend; i++) {
+			DisasterNotification disasterNotification = listParser.get(i);
 			String f = disasterNotification.getFileName();
 			String jsonContent = "";
 
-			if(f != null){
-				jsonContent = "{ \"to\":["+connectUserid(useridList)+"],"
-						+ " \"messages\":[ {\"type\":\"text\", \"text\":\""+textContent(disasterNotification)+"\\n\"}, "
-											+ " { \"type\":\"image\",\"originalContentUrl\":\""+imageUrl(f)+"\",\"previewImageUrl\": \""+imageUrl(f)+"\" } ]}";
+			if (f != null) {
+				jsonContent = "{ \"to\":[" + connectUserid(useridList) + "],"
+						+ " \"messages\":[ {\"type\":\"text\", \"text\":\"" + textContent(disasterNotification)
+						+ "\\n\"}, " + " { \"type\":\"image\",\"originalContentUrl\":\"" + imageUrl(f)
+						+ "\",\"previewImageUrl\": \"" + imageUrl(f) + "\" } ]}";
 
-			}else{
-				jsonContent = "{ \"to\":["+connectUserid(useridList)+"], \"messages\":[{\"type\":\"text\", \"text\":\""+textContent(disasterNotification)+"\"}]}";
+			} else {
+				jsonContent = "{ \"to\":[" + connectUserid(useridList)
+						+ "], \"messages\":[{\"type\":\"text\", \"text\":\"" + textContent(disasterNotification)
+						+ "\"}]}";
 			}
-						lineHttps.sendPOSTReturnToken(LineHttps.lineurl,jsonContent);
+			lineHttps.sendPOSTReturnToken(LineHttps.lineurl, jsonContent);
 		}
-//		
+		//
 	}
 
-
-	private String connectUserid(List<String> useridList){
+	private String connectUserid(List<String> useridList) {
 		String returnString = "";
-		if(useridList.size() != 0){
-			 returnString = "\"";
+		if (useridList.size() != 0) {
+			returnString = "\"";
 		}
-		for(int i = 0 , iend = useridList.size();i<iend;i++){
-			if(i==iend-1){
-				returnString = returnString+useridList.get(i)+"\"";
-			}else{
-				returnString = returnString+useridList.get(i)+"\",\"";
+		for (int i = 0, iend = useridList.size(); i < iend; i++) {
+			if (i == iend - 1) {
+				returnString = returnString + useridList.get(i) + "\"";
+			} else {
+				returnString = returnString + useridList.get(i) + "\",\"";
 			}
-			
+
 		}
-		
+
 		return returnString;
-		
+
 	}
-	public  String textContent(DisasterNotification listParser){
+
+	public String textContent(DisasterNotification listParser) {
 		CoordinatesPoint coordinatesPoints = listParser.getCoordinatesPoints().get(0);
 		String c = String.valueOf(coordinatesPoints.getLatitudeCoord());
 		String l = String.valueOf(coordinatesPoints.getLongitudeCoord());
-		String returnString= "回報時間 : "+new SimpleDateFormat("YYYY/MM/dd HH:mm").format(listParser.getReportDate())
-							+"\\n回報姓名 : "+ listParser.getName()
-							+"\\n回報內容 : "+listParser.getReportContent()
-							+"\\n回報地點 : "+googleMapUrl(c,l,this.zoom);
+		String returnString = "回報時間 : " + new SimpleDateFormat("YYYY/MM/dd HH:mm").format(listParser.getReportDate())
+				+ "\\n回報姓名 : " + listParser.getName() + "\\n回報內容 : " + listParser.getReportContent() 
+				+ "\\n回報地點 : " + googleMapUrl(c, l, this.zoom)
+				;
 		return returnString;
 	}
-	
-	private  String imageUrl(String imageFileName){
-		String url = hostUrl+"img//" + imageFileName;
+
+	private String imageUrl(String imageFileName) {
+		String url = hostUrl + "img//" + imageFileName;
 		return url;
-		
+
+	}
+
+	private String googleMapUrl(String lat, String lng, String zoom) {
+//		String url = hostUrl + "googlemapfile.html?" + "lat=" + lat + "&lng=" + lng + "&zoom=" + zoom;
+		String url = googlehostUrl + "/?" + "lat=" + lat + "&lng=" + lng + "&zoom=" + zoom;
+		return url;
+
 	}
 	
-	private String googleMapUrl(String lat,String lng,String zoom){
-		String url = hostUrl+"googlemapfile.html?"+"lat="+lat+"&lng="+lng+"&zoom="+zoom;
+	private String uuidUrl(String uuid,String zoom) {
+//		String url = hostUrl + "googlemapfile.html?" + "lat=" + lat + "&lng=" + lng + "&zoom=" + zoom;
+		String url = googlehostUrl + "/sql.php?" + "id="+uuid+"&zoom="+zoom;
 		return url;
-		
+
 	}
-	
+
 }

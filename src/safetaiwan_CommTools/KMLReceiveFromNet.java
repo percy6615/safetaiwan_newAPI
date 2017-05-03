@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Node;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
 
 public class KMLReceiveFromNet {
@@ -26,7 +27,7 @@ public class KMLReceiveFromNet {
 
 	}
 
-	public void downloadKML(String url, String outFilePath) {
+	public void downloadKML(String url, String outFilePath, boolean flag) {
 
 		if (url.equals("") || url == null) {
 			url = "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
@@ -39,11 +40,20 @@ public class KMLReceiveFromNet {
 			List<String> lines = Arrays.asList(a);
 			String s = CommonTools.APPLocation();
 			String outFilePathALL = "";
-			if (outFilePath.equals("") || outFilePath == null) {
-				outFilePathALL = s + "/resources/kml/underwater.kml";
+			if (flag == true) {
+				if (outFilePath.equals("") || outFilePath == null) {
+					outFilePathALL = s + "/resources/kml/underwater.kml";
+				} else {
+					outFilePathALL = "C:\\inetpub\\wwwroot\\" + outFilePath;
+				}
 			} else {
-				outFilePathALL = s + "/resources/kml/" + outFilePath;
+				if (outFilePath.equals("") || outFilePath == null) {
+					outFilePathALL = s + "/resources/kml/underwater.kml";
+				} else {
+					outFilePathALL = s + "/resources/kml/" + outFilePath;
+				}
 			}
+
 			Path file = Paths.get(outFilePathALL);
 			Files.write(file, lines, Charset.forName("UTF-8"));
 		} catch (IOException e) {
@@ -88,11 +98,14 @@ public class KMLReceiveFromNet {
 			final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
 			final DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
 			final LSSerializer writer = impl.createLSSerializer();
+			final LSOutput out = impl.createLSOutput();
+			out.setEncoding("UTF-8");
 			// Set this to true if the output needs to be beautified.
 			writer.getDomConfig().setParameter("format-pretty-print", Boolean.TRUE);
 			// Set this to true if the declaration is needed to be outputted.
 			writer.getDomConfig().setParameter("xml-declaration", keepDeclaration);
-
+//			out.setByteStream(src1);
+//			writer.write(document, out);
 			return writer.writeToString(document);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

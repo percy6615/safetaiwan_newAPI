@@ -13,8 +13,8 @@ public class LineHttps {
 	private final static String USER_AGENT = "Mozilla/5.0";
 	private static String token = "pslrmKmSM30059ArgBD2wv4Sm6zRbyjqpdrYIHFZbtGZmqO76wuOBV5p2+re039F7umgZptlue+RUiv+k38Oin6v1DIt5wfS8myZ1Xw3h7RPRDczDJgakudp0I8EheQ+VLE77SiMvDtMGUxcg7nvXAdB04t89/1O/w1cDnyilFU=";
 	// static String lineurl = "https://api.line.me/v2/bot/message/push";
-//	public static String lineurl = "https://api.line.me/v2/bot/message/multicast";
-	public static String lineurl = "https://api.line.me/v2/bot/profile/";
+	public static String lineurl = "https://api.line.me/v2/bot/message/multicast";
+//	public static String lineurl = "https://api.line.me/v2/bot/profile/";
 	// static String replyBody = String.format("{\"to\":\"%s\",
 	// \"messages\":[{\"type\":\"text\", \"text\":\"line bot
 	// send\"}]}","Uc7a46420c8125d4fcaa0312f2d47dc10");

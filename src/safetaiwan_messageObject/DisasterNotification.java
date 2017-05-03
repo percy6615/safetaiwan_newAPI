@@ -140,7 +140,7 @@ public class DisasterNotification {
 	public void descriptionParser() {
 		Document doc = Jsoup.parse(this.description);
 		Elements link = doc.select("tr");
-
+		
 		int linkNum = link.size();
 		if (linkNum >= 2) {
 			Element e1 = link.get(0).select("td").first();

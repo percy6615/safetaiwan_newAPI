@@ -9,14 +9,17 @@ import java.util.Properties;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+import safetaiwan_CommTools.CommonTools;
+
 public class CommonDBSource implements DBSource {
 	private Properties props;
 	private String url;
 	private String user;
 	private String passwd;
 	private ComboPooledDataSource cpds;
-	private static volatile  CommonDBSource datasource;
+	private static volatile CommonDBSource datasource;
 	private static String propertyPath = "resources/cfg/jdbc.properties";
+
 	public static CommonDBSource getInstance() {
 		if (datasource == null) {
 			datasource = new CommonDBSource();
@@ -31,12 +34,12 @@ public class CommonDBSource implements DBSource {
 	}
 
 	public CommonDBSource(String configFile) {
+		CommonTools commonTools = new CommonTools();
 		cpds = new ComboPooledDataSource();
-		props = new Properties();
 		try {
-			props.load(new FileInputStream(configFile));
+			props = commonTools.getProperties(configFile);
 			cpds.setDriverClass(props.getProperty("onlyfun.caterpillar.driver"));
-		} catch (IOException | PropertyVetoException e) {
+		} catch (PropertyVetoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -60,7 +63,7 @@ public class CommonDBSource implements DBSource {
 		cpds.setMaxStatements(Integer.valueOf(maxstatements));
 	}
 
-	public Connection getConnection()  {
+	public Connection getConnection() {
 		try {
 			return this.cpds.getConnection();
 		} catch (SQLException e) {
@@ -69,7 +72,7 @@ public class CommonDBSource implements DBSource {
 		return null;
 	}
 
-	public void closeConnection(Connection conn)  {
+	public void closeConnection(Connection conn) {
 		try {
 			conn.close();
 		} catch (SQLException e) {
