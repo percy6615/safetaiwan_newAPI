@@ -14,6 +14,8 @@ import safetaiwan_LineMessage.LineHttps;
 import safetaiwan_Parser.DisasterNotificationParser;
 import safetaiwan_messageObject.CoordinatesPoint;
 import safetaiwan_messageObject.DisasterNotification;
+import safetaiwan_messageObject.HsinChuGeoJson;
+import safetaiwan_messageObject.PointFilterPolygon;
 
 public class AskSafeTaiwan implements CallBackParser {
 
@@ -55,7 +57,17 @@ public class AskSafeTaiwan implements CallBackParser {
 		List<DisasterNotification> list = disasterNotificationParser
 				.disasterNotificationParserList(disasterNotificationParser.getKml(), timestamp);
 		//filter DisasterNotification list
-		
+//		PointFilterPolygon pointFilterPolygon = new PointFilterPolygon();
+//		List<HsinChuGeoJson> p = pointFilterPolygon.parserJson("");
+//		List<CoordinatesPoint> getCoordinatesPoint = pointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
+//		pointFilterPolygon.preCalcValues(getCoordinatesPoint);
+//		for(int i = 0 ; i < list.size();i++){
+//			CoordinatesPoint test = list.get(i).getCoordinatesPoints().get(0);
+//			boolean TF= pointFilterPolygon.pointInPolygon(test);
+//			if(!TF){
+//				list.remove(i);
+//			}
+//		}
 		// database insert
 		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		disasterNotificationDBfunction.insertDisasterNotificationList(list);
