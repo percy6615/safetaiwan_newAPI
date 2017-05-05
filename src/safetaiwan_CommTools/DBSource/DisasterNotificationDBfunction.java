@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import safetaiwan_messageObject.CoordinatesPoint;
 import safetaiwan_messageObject.DisasterNotification;
 
 public class DisasterNotificationDBfunction extends DBFunction {
@@ -144,5 +145,41 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			e.printStackTrace();
 		}
 		return userid;
+	}
+	
+	public List<DisasterNotification> getDisasterNotifications(){
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		String SQL = "select * from safetaiwan_disasternotification ";
+		List<DisasterNotification> ls= new ArrayList();
+		try {
+			ResultSet r = conn.prepareStatement(SQL).executeQuery();
+			while(r.next()) {
+				DisasterNotification disasterNotification = new DisasterNotification();
+				CoordinatesPoint coordinatesPoint = new CoordinatesPoint();
+				coordinatesPoint.setLatitudeCoord(Double.valueOf(r.getString("latitudeCoord")));
+				coordinatesPoint.setLongitudeCoord(Double.valueOf(r.getString("longitudeCoord")));
+				List<CoordinatesPoint> coordinatesPoints = new ArrayList<CoordinatesPoint>();
+				coordinatesPoints.add(coordinatesPoint);
+				disasterNotification.setCoordinatesPoints(coordinatesPoints);
+				disasterNotification.setDescription(r.getString("description"));
+				disasterNotification.setFileName(r.getString("fileName"));
+				disasterNotification.setFlag(0);
+				disasterNotification.setIconStyleID(null);
+				disasterNotification.setImgURL(r.getString("imgURL"));
+				disasterNotification.setKMLTime(r.getTimestamp("kmltime"));
+				disasterNotification.setName(r.getString("name"));
+				disasterNotification.setReportContent(r.getString("reportContent"));
+				disasterNotification.setReportDate(r.getTimestamp("reportDate"));
+				ls.add(disasterNotification);
+			}
+			r.close();
+			conn.close();
+			return ls;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 }

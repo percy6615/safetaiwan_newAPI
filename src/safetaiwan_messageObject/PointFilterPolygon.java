@@ -13,43 +13,46 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import safetaiwan_CommTools.CommonTools;
+import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
 
 public class PointFilterPolygon {
 	public  List<CoordinatesPoint> polygonPoints;
 
 	public static void main(String[] args) {
-//		CoordinatesPoint p1 = new CoordinatesPoint();
-//		p1.setLongitudeCoord(0);
-//		p1.setLatitudeCoord(0);
-//		CoordinatesPoint p2 = new CoordinatesPoint();
-//		p2.setLongitudeCoord(5);
-//		p2.setLatitudeCoord(0);
-//		CoordinatesPoint p3 = new CoordinatesPoint();
-//		p3.setLongitudeCoord(8);
-//		p3.setLatitudeCoord(3);
-//		CoordinatesPoint p4 = new CoordinatesPoint();
-//		p4.setLongitudeCoord(4);
-//		p4.setLatitudeCoord(7);
-//		CoordinatesPoint p5 = new CoordinatesPoint();
-//		p5.setLongitudeCoord(-1);
-//		p5.setLatitudeCoord(5);
+		DisasterNotificationDBfunction disasterNotificationDBfunction= new DisasterNotificationDBfunction();
+		List<DisasterNotification>  disasterNotifications= disasterNotificationDBfunction.getDisasterNotifications();
+		
+		PointFilterPolygon pointFilterPolygon = new PointFilterPolygon();
+		List<HsinChuGeoJson> p = pointFilterPolygon.parserJson("");
+		List<CoordinatesPoint> getCoordinatesPoint = pointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
+		pointFilterPolygon.preCalcValues(getCoordinatesPoint);
+		List<DisasterNotification> save = new ArrayList<DisasterNotification>();
+		
+		for(int i = 0 ; i < disasterNotifications.size();i++){
+			DisasterNotification disasterNotification= disasterNotifications.get(i);
+			CoordinatesPoint test = disasterNotification.getCoordinatesPoints().get(0);
+			boolean TF= pointFilterPolygon.pointInPolygon(test);
+			System.out.println(test.getLongitudeCoord()+" , "+test.getLatitudeCoord()+" : "+TF);
+			if(TF){
+				save.add(disasterNotification);
+			}
+		}
+		
+		System.out.println(save.size());
+//		
+		for(int i = 0 ; i < save.size();i++){
+			System.out.print(save.get(i).getCoordinatesPoints().get(0).getLongitudeCoord()+",");
+			System.out.println(save.get(i).getCoordinatesPoints().get(0).getLatitudeCoord());
+		}
+//		
+//		PointFilterPolygon PointFilterPolygon= new PointFilterPolygon();
 //		CoordinatesPoint test = new CoordinatesPoint();
-//		test.setLongitudeCoord(6);
-//		test.setLatitudeCoord(1.1);
-//		List<CoordinatesPoint> list = new ArrayList();
-//		list.add(p1);
-//		list.add(p2);
-//		list.add(p3);
-//		list.add(p4);
-//		list.add(p5);
-		PointFilterPolygon PointFilterPolygon= new PointFilterPolygon();
-		CoordinatesPoint test = new CoordinatesPoint();
-		test.setLongitudeCoord(121.16028041524);
-		test.setLatitudeCoord(24.9066644);
-		List<HsinChuGeoJson> p = PointFilterPolygon.parserJson("");
-		List<CoordinatesPoint> getCoordinatesPoint = PointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
-		PointFilterPolygon.preCalcValues(getCoordinatesPoint);
-		System.out.println(PointFilterPolygon.pointInPolygon(test));
+//		test.setLongitudeCoord(121.5425755);
+//		test.setLatitudeCoord(25.0334422);
+//		List<HsinChuGeoJson> p = PointFilterPolygon.parserJson("");
+//		List<CoordinatesPoint> getCoordinatesPoint = PointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
+//		PointFilterPolygon.preCalcValues(getCoordinatesPoint);
+//		System.out.println(PointFilterPolygon.pointInPolygon(test));
 	}
 
 	public  List<CoordinatesPoint> getPolygonPoints() {
@@ -163,5 +166,33 @@ public class PointFilterPolygon {
 			}
 		}
 		return coordinatesPoints;
+	}
+	
+	
+	public void mark(){
+//		CoordinatesPoint p1 = new CoordinatesPoint();
+//		p1.setLongitudeCoord(0);
+//		p1.setLatitudeCoord(0);
+//		CoordinatesPoint p2 = new CoordinatesPoint();
+//		p2.setLongitudeCoord(5);
+//		p2.setLatitudeCoord(0);
+//		CoordinatesPoint p3 = new CoordinatesPoint();
+//		p3.setLongitudeCoord(8);
+//		p3.setLatitudeCoord(3);
+//		CoordinatesPoint p4 = new CoordinatesPoint();
+//		p4.setLongitudeCoord(4);
+//		p4.setLatitudeCoord(7);
+//		CoordinatesPoint p5 = new CoordinatesPoint();
+//		p5.setLongitudeCoord(-1);
+//		p5.setLatitudeCoord(5);
+//		CoordinatesPoint test = new CoordinatesPoint();
+//		test.setLongitudeCoord(6);
+//		test.setLatitudeCoord(1.1);
+//		List<CoordinatesPoint> list = new ArrayList();
+//		list.add(p1);
+//		list.add(p2);
+//		list.add(p3);
+//		list.add(p4);
+//		list.add(p5);
 	}
 }
