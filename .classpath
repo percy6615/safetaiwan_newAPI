@@ -41,5 +41,7 @@
 	<classpathentry kind="lib" path="libs/htmlunit-2.26-OSGi.jar"/>
 	<classpathentry kind="lib" path="libs/line-bot-api-client-1.6.0.jar"/>
 	<classpathentry kind="lib" path="libs/line-bot-model-1.6.0.jar"/>
+	<classpathentry kind="lib" path="/sample-spring-boot-echo/jar/json-20140107.jar"/>
+	<classpathentry kind="lib" path="libs/json-simple-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -9,22 +9,20 @@ import java.util.Properties;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import safetaiwan_CommTools.CommonTools;
-
 public class CommonDBSource implements DBSource {
 	private Properties props;
 	private String url;
 	private String user;
 	private String passwd;
 	private ComboPooledDataSource cpds;
-	private static volatile CommonDBSource datasource;
+	private static volatile  CommonDBSource datasource;
 	private static String propertyPath = "resources/cfg/jdbc.properties";
-
 	public static CommonDBSource getInstance() {
 		if (datasource == null) {
 			datasource = new CommonDBSource();
 			return datasource;
 		} else {
+			
 			return datasource;
 		}
 	}
@@ -34,12 +32,12 @@ public class CommonDBSource implements DBSource {
 	}
 
 	public CommonDBSource(String configFile) {
-		CommonTools commonTools = new CommonTools();
 		cpds = new ComboPooledDataSource();
+		props = new Properties();
 		try {
-			props = commonTools.getProperties(configFile);
+			props.load(new FileInputStream(configFile));
 			cpds.setDriverClass(props.getProperty("onlyfun.caterpillar.driver"));
-		} catch (PropertyVetoException e) {
+		} catch (IOException | PropertyVetoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -57,13 +55,29 @@ public class CommonDBSource implements DBSource {
 		String acquireincrement = props.getProperty("onlyfun.caterpillar.acquireincrement");
 		String maxpoolsize = props.getProperty("onlyfun.caterpillar.maxpoolsize");
 		String maxstatements = props.getProperty("onlyfun.caterpillar.maxstatements");
+		String PreferredTestQuery = props.getProperty("onlyfun.caterpillar.PreferredTestQuery");
+		String IdleConnectionTestPeriod = props.getProperty("onlyfun.caterpillar.IdleConnectionTestPeriod");
+		String MaxIdleTime = props.getProperty("onlyfun.caterpillar.MaxIdleTime");
+		String TestConnectionOnCheckout = props.getProperty("onlyfun.caterpillar.TestConnectionOnCheckout");
 		cpds.setMinPoolSize(Integer.valueOf(minpoolsize));
 		cpds.setAcquireIncrement(Integer.valueOf(acquireincrement));
 		cpds.setMaxPoolSize(Integer.valueOf(maxpoolsize));
 		cpds.setMaxStatements(Integer.valueOf(maxstatements));
+		cpds.setPreferredTestQuery(PreferredTestQuery);
+		cpds.setIdleConnectionTestPeriod(Integer.valueOf(IdleConnectionTestPeriod));
+		cpds.setMaxIdleTime(Integer.valueOf(MaxIdleTime));
+		cpds.setTestConnectionOnCheckout(Boolean.valueOf(TestConnectionOnCheckout));
+//		set to 'SELECT 1'      
+//		preferredTestQuery = 'SELECT 1 '   
+		//set to something much less than wait_timeout, prevents connections from going stale   
+//		idleConnectionTestPeriod = 18000      
+		//set to something slightly less than wait_timeout, preventing 'stale' connections from being //handed out   
+//		maxIdleTime = 25000   
+		//if you can take the performance 'hit', set to "true"   
+//		testConnectionOnCheckout = true   
 	}
 
-	public Connection getConnection() {
+	public Connection getConnection()  {
 		try {
 			return this.cpds.getConnection();
 		} catch (SQLException e) {
@@ -72,7 +86,7 @@ public class CommonDBSource implements DBSource {
 		return null;
 	}
 
-	public void closeConnection(Connection conn) {
+	public void closeConnection(Connection conn)  {
 		try {
 			conn.close();
 		} catch (SQLException e) {

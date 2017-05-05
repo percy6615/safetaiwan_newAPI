@@ -20,8 +20,8 @@ public class AskSafeTaiwan implements CallBackParser {
 	private DownloadKMLFile downloadFile;
 	private String fileName;
 	private Properties props = null;
-	private String hostUrl = "https://bba60fcf.ngrok.io//";
-	private String googlehostUrl = "http://60.250.226.78:29";
+	private String imgHostUrl = "https://bba60fcf.ngrok.io//";
+	private String googleHostUrl = "http://60.250.226.78:29";
 	private String zoom = "17";
 	private String propertyfile =  "resources/cfg/jdbc.properties";
 	public AskSafeTaiwan() {
@@ -54,6 +54,8 @@ public class AskSafeTaiwan implements CallBackParser {
 		disasterNotificationParser.setKml(fileName);
 		List<DisasterNotification> list = disasterNotificationParser
 				.disasterNotificationParserList(disasterNotificationParser.getKml(), timestamp);
+		//filter DisasterNotification list
+		
 		// database insert
 		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		disasterNotificationDBfunction.insertDisasterNotificationList(list);
@@ -130,21 +132,21 @@ public class AskSafeTaiwan implements CallBackParser {
 	}
 
 	private String imageUrl(String imageFileName) {
-		String url = hostUrl + "img//" + imageFileName;
+		String url = imgHostUrl + "img//" + imageFileName;
 		return url;
 
 	}
 
 	private String googleMapUrl(String lat, String lng, String zoom) {
 //		String url = hostUrl + "googlemapfile.html?" + "lat=" + lat + "&lng=" + lng + "&zoom=" + zoom;
-		String url = googlehostUrl + "/?" + "lat=" + lat + "&lng=" + lng + "&zoom=" + zoom;
+		String url = googleHostUrl + "/?" + "lat=" + lat + "&lng=" + lng + "&zoom=" + zoom;
 		return url;
 
 	}
 	
 	private String uuidUrl(String uuid,String zoom) {
 //		String url = hostUrl + "googlemapfile.html?" + "lat=" + lat + "&lng=" + lng + "&zoom=" + zoom;
-		String url = googlehostUrl + "/sql.php?" + "id="+uuid+"&zoom="+zoom;
+		String url = googleHostUrl + "/sql.php?" + "id="+uuid+"&zoom="+zoom;
 		return url;
 
 	}
