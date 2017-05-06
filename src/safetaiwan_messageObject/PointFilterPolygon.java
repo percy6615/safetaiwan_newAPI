@@ -23,11 +23,16 @@ public class PointFilterPolygon {
 		List<DisasterNotification>  disasterNotifications= disasterNotificationDBfunction.getDisasterNotifications();
 		
 		PointFilterPolygon pointFilterPolygon = new PointFilterPolygon();
-		List<HsinChuGeoJson> p = pointFilterPolygon.parserJson("");
+		
+		List<HsinChuGeoJson> p = pointFilterPolygon.parserJson("allcounty.json");
+//		for(int index =0;index<p.size();index++){
+//			System.out.println(p.get(index).getCityName());;
+//		}
+//		
 		List<CoordinatesPoint> getCoordinatesPoint = pointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
 		pointFilterPolygon.preCalcValues(getCoordinatesPoint);
 		List<DisasterNotification> save = new ArrayList<DisasterNotification>();
-		
+//		
 		for(int i = 0 ; i < disasterNotifications.size();i++){
 			DisasterNotification disasterNotification= disasterNotifications.get(i);
 			CoordinatesPoint test = disasterNotification.getCoordinatesPoints().get(0);
@@ -37,7 +42,7 @@ public class PointFilterPolygon {
 				save.add(disasterNotification);
 			}
 		}
-		
+//		
 		System.out.println(save.size());
 //		
 		for(int i = 0 ; i < save.size();i++){
@@ -112,6 +117,8 @@ public class PointFilterPolygon {
 	public  List<HsinChuGeoJson> parserJson(String fileName) {
 		if (fileName == null || fileName.equals("")) {
 			fileName = CommonTools.APPLocation() + "\\resources\\cfg\\hsinchu.json";
+		}else{
+			fileName = CommonTools.APPLocation() + "\\resources\\cfg\\"+fileName;
 		}
 		try {
 			FileReader reader = new FileReader(fileName);
@@ -119,29 +126,33 @@ public class PointFilterPolygon {
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 			JSONArray features = (JSONArray) jsonObject.get("features");
 			Iterator<?> i = features.iterator();
+//			System.out.println("features "+features.size());
 			List<HsinChuGeoJson> hsinChuGeoJsons = new ArrayList<HsinChuGeoJson>();
 			while (i.hasNext()) {
 				HsinChuGeoJson hsinChuGeoJson = new HsinChuGeoJson();
 				JSONObject innerObj = (JSONObject) i.next();
 				JSONObject innerProperties = (JSONObject) innerObj.get("properties");
+//				System.out.print(innerProperties.get("c_name"));
 				JSONObject innerGeometry = (JSONObject) innerObj.get("geometry");
 				JSONArray Geometries = (JSONArray) innerGeometry.get("coordinates");
 				Iterator<?> j = Geometries.iterator();
 				hsinChuGeoJson.setCityName((String) innerProperties.get("c_name"));
-				// System.out.println(innerProperties.get("c_name"));
 				List<CoordinatesPoint> coordinatesPoints = new ArrayList<CoordinatesPoint>();
+//				System.out.println("Geometries "+Geometries.size());
 				while (j.hasNext()) {
 					JSONArray innerinnerObj = (JSONArray) j.next();
+//					System.out.println("innerinnerObj "+innerinnerObj.size());
 					Iterator<?> k = innerinnerObj.iterator();
 					while (k.hasNext()) {
 						JSONArray innerinnerinnerObj = (JSONArray) k.next();
+//						System.out.println("innerinnerinnerObj "+innerinnerinnerObj.size());
 						Iterator<?> l = innerinnerinnerObj.iterator();
 						while (l.hasNext()) {
 							CoordinatesPoint coordinatesPoint = new CoordinatesPoint();
 							JSONArray tt = (JSONArray) l.next();
 							// System.out.println(tt.get(0));
-							coordinatesPoint.setLongitudeCoord((double) tt.get(0));
-							coordinatesPoint.setLatitudeCoord((double) tt.get(1));
+							coordinatesPoint.setLongitudeCoord(Double.valueOf( String.valueOf( tt.get(0))));
+							coordinatesPoint.setLatitudeCoord(Double.valueOf( String.valueOf( tt.get(1))));
 							coordinatesPoints.add(coordinatesPoint);
 							// System.out.println(tt);
 						}

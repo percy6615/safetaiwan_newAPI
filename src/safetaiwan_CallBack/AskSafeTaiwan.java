@@ -54,18 +54,20 @@ public class AskSafeTaiwan implements CallBackParser {
 		// parser
 		DisasterNotificationParser disasterNotificationParser = DisasterNotificationParser.getInstance();
 		disasterNotificationParser.setKml(fileName);
-		List<DisasterNotification> list = disasterNotificationParser
+		List<DisasterNotification> list1 = disasterNotificationParser
 				.disasterNotificationParserList(disasterNotificationParser.getKml(), timestamp);
 //		filter DisasterNotification list
 		PointFilterPolygon pointFilterPolygon = new PointFilterPolygon();
 		List<HsinChuGeoJson> p = pointFilterPolygon.parserJson("");
 		List<CoordinatesPoint> getCoordinatesPoint = pointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
 		pointFilterPolygon.preCalcValues(getCoordinatesPoint);
-		for(int i = 0 ; i < list.size();i++){
-			CoordinatesPoint test = list.get(i).getCoordinatesPoints().get(0);
+		List<DisasterNotification> list = new ArrayList<DisasterNotification>();
+		for(int i = 0 ; i < list1.size();i++){
+			DisasterNotification disasterNotification=list1.get(i);
+			CoordinatesPoint test = list1.get(i).getCoordinatesPoints().get(0);
 			boolean TF= pointFilterPolygon.pointInPolygon(test);
-			if(!TF){
-				list.remove(i);
+			if(TF){
+				list.add(disasterNotification);
 			}
 		}
 		// database insert
