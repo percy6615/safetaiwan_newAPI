@@ -23,7 +23,7 @@ public class AskSafeTaiwan implements CallBackParser {
 	private String fileName;
 	private Properties props = null;
 	private String imgHostUrl = "https://bba60fcf.ngrok.io//";
-	private String googleHostUrl = "http://60.250.226.78:29";
+	private String googleHostUrl = "http://60.250.226.78";
 	private String zoom = "17";
 	private String propertyfile =  "resources/cfg/jdbc.properties";
 	public AskSafeTaiwan() {
@@ -54,22 +54,24 @@ public class AskSafeTaiwan implements CallBackParser {
 		// parser
 		DisasterNotificationParser disasterNotificationParser = DisasterNotificationParser.getInstance();
 		disasterNotificationParser.setKml(fileName);
-		List<DisasterNotification> list1 = disasterNotificationParser
+		List<DisasterNotification> list = disasterNotificationParser
 				.disasterNotificationParserList(disasterNotificationParser.getKml(), timestamp);
 //		filter DisasterNotification list
-		PointFilterPolygon pointFilterPolygon = new PointFilterPolygon();
-		List<HsinChuGeoJson> p = pointFilterPolygon.parserJson("");
-		List<CoordinatesPoint> getCoordinatesPoint = pointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
-		pointFilterPolygon.preCalcValues(getCoordinatesPoint);
-		List<DisasterNotification> list = new ArrayList<DisasterNotification>();
-		for(int i = 0 ; i < list1.size();i++){
-			DisasterNotification disasterNotification=list1.get(i);
-			CoordinatesPoint test = list1.get(i).getCoordinatesPoints().get(0);
-			boolean TF= pointFilterPolygon.pointInPolygon(test);
-			if(TF){
-				list.add(disasterNotification);
-			}
-		}
+//		if(false){
+//		PointFilterPolygon pointFilterPolygon = new PointFilterPolygon();
+//		List<HsinChuGeoJson> p = pointFilterPolygon.parserJson("");
+//		List<CoordinatesPoint> getCoordinatesPoint = pointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
+//		pointFilterPolygon.preCalcValues(getCoordinatesPoint);
+//		List<DisasterNotification> list = new ArrayList<DisasterNotification>();
+//		for(int i = 0 ; i < list1.size();i++){
+//			DisasterNotification disasterNotification=list1.get(i);
+//			CoordinatesPoint test = list1.get(i).getCoordinatesPoints().get(0);
+//			boolean TF= pointFilterPolygon.pointInPolygon(test);
+//			if(TF){
+//				list.add(disasterNotification);
+//			}
+//		}
+//		}
 		// database insert
 		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		disasterNotificationDBfunction.insertDisasterNotificationList(list);
