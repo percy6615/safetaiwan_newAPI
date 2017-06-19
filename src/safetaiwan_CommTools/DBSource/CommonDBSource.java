@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-
+import com.mchange.v2.c3p0.dbms.OracleUtils;
 public class CommonDBSource implements DBSource {
 	private Properties props;
 	private String url;
@@ -18,6 +18,7 @@ public class CommonDBSource implements DBSource {
 	private static volatile  CommonDBSource datasource;
 	private static String propertyPath = "resources/cfg/jdbc.properties";
 	public static CommonDBSource getInstance() {
+		
 		if (datasource == null) {
 			datasource = new CommonDBSource();
 			return datasource;
@@ -32,6 +33,9 @@ public class CommonDBSource implements DBSource {
 	}
 
 	public CommonDBSource(String configFile) {
+		//close config log
+		System.setProperty("com.mchange.v2.log.FallbackMLog.DEFAULT_CUTOFF_LEVEL", "WARNING");
+		System.setProperty("com.mchange.v2.log.MLog", "com.mchange.v2.log.FallbackMLog");
 		cpds = new ComboPooledDataSource();
 		props = new Properties();
 		try {

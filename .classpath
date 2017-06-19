@@ -11,7 +11,6 @@
 	<classpathentry kind="lib" path="libs/jaxb-xjc-2.2.jar"/>
 	<classpathentry kind="lib" path="libs/jsoup-1.9.2.jar"/>
 	<classpathentry kind="lib" path="libs/MagicLocationChecker-2.1.1.jar"/>
-	<classpathentry kind="lib" path="libs/c3p0/c3p0-0.9.5.2.jar"/>
 	<classpathentry kind="lib" path="libs/c3p0/c3p0-oracle-thin-extras-0.9.5.2.jar"/>
 	<classpathentry kind="lib" path="libs/c3p0/mchange-commons-java-0.2.11.jar"/>
 	<classpathentry kind="lib" path="libs/c3p0/mysql-connector-java-5.0.8.jar"/>
@@ -43,5 +42,7 @@
 	<classpathentry kind="lib" path="libs/line-bot-model-1.6.0.jar"/>
 	<classpathentry kind="lib" path="/sample-spring-boot-echo/jar/json-20140107.jar"/>
 	<classpathentry kind="lib" path="libs/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="libs/c3p0/c3p0-0.9.5.2.jar"/>
+	<classpathentry kind="lib" path="libs/c3p0/ojdbc14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

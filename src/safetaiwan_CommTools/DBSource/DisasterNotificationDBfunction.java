@@ -28,6 +28,8 @@ public class DisasterNotificationDBfunction extends DBFunction {
 	public void insertDisasterNotificationList(List<DisasterNotification> disasterNotification) {
 		Connection conn = getConnection();
 		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?,?,?)";
+//		String insertSQL = "insert into safetaiwan_disaster values (?,?,?,?,?,?,?,?,?,?,?,?)";
+
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(insertSQL);
@@ -60,6 +62,8 @@ public class DisasterNotificationDBfunction extends DBFunction {
 	public void insertDisasterNotification(DisasterNotification disasterNotification) {
 		Connection conn = getConnection();
 		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?,?,?)";
+//		String insertSQL = "insert into safetaiwan_disaster values (?,?,?,?,?,?,?,?,?,?,?,?)";
+
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(insertSQL);
@@ -82,7 +86,33 @@ public class DisasterNotificationDBfunction extends DBFunction {
 			e.printStackTrace();
 		}
 	}
+	public void insertDisasterNotificationfair(DisasterNotification disasterNotification) {
+		Connection conn = getConnection();
+		String insertSQL = "insert into safetaiwan_disasternotification values (?,?,?,?,?,?,?,?,?,?,?,?)";
+//		String insertSQL = "insert into safetaiwan_disaster values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(insertSQL);
+			pstmt.setString(1, disasterNotification.getUUID());
+			pstmt.setString(2, disasterNotification.getName());
+			pstmt.setDouble(3, disasterNotification.getCoordinatesPoints().get(0).getLongitudeCoord());
+			pstmt.setDouble(4, disasterNotification.getCoordinatesPoints().get(0).getLatitudeCoord());
+			pstmt.setString(5, disasterNotification.getDescription());
+			pstmt.setString(6, disasterNotification.getIconStyleID());
+			pstmt.setString(7, disasterNotification.getReportContent());
+			pstmt.setTimestamp(8, disasterNotification.getReportDate());
+			pstmt.setString(9, disasterNotification.getImgURL());
+			pstmt.setString(10, disasterNotification.getFileName());
+			pstmt.setTimestamp(11, disasterNotification.getKMLTime());
+			pstmt.setInt(12, disasterNotification.getFlag());
+			pstmt.executeUpdate();
+			pstmt.clearParameters();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public void createDisasterNotification() {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -116,6 +146,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		String SQL = "select max(reportdate) as reportdate from safetaiwan_disasternotification ";
+//		String SQL = "select max(reportdate) as reportdate from safetaiwan_disaster ";
 		Timestamp t = null;
 		try {
 			ResultSet r = conn.prepareStatement(SQL).executeQuery();
@@ -151,6 +182,7 @@ public class DisasterNotificationDBfunction extends DBFunction {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		String SQL = "select * from safetaiwan_disasternotification ";
+//		String SQL = "select * from safetaiwan_disaster ";
 		List<DisasterNotification> ls= new ArrayList();
 		try {
 			ResultSet r = conn.prepareStatement(SQL).executeQuery();

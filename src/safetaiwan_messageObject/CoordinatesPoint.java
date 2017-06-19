@@ -5,6 +5,13 @@ public class CoordinatesPoint {
 	private double latitudeCoord;
 	private double constant;
 	private double multiple;
+	public CoordinatesPoint(){
+		
+	}
+	public CoordinatesPoint(double longitudeCoord, double latitudeCoord){//120 22
+		this.longitudeCoord=longitudeCoord;
+		this.latitudeCoord = latitudeCoord;
+	}
 	public double getConstant() {
 		return constant;
 	}

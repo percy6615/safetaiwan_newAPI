@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import safetaiwan_CommTools.CommonTools;
 import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
+import safetaiwan_CommTools.DBSourceO.DisasterNotificationDBfunctionO;
 import safetaiwan_LineMessage.LineHttps;
 import safetaiwan_Parser.DisasterNotificationParser;
 import safetaiwan_messageObject.CoordinatesPoint;
@@ -22,7 +23,7 @@ public class AskSafeTaiwan implements CallBackParser {
 	private DownloadKMLFile downloadFile;
 	private String fileName;
 	private Properties props = null;
-	private String imgHostUrl = "https://bba60fcf.ngrok.io//";
+	private String imgHostUrl = "https://28f61bab.ngrok.io//";// port 80 https
 	private String googleHostUrl = "http://60.250.226.78";
 	private String zoom = "17";
 	private String propertyfile =  "resources/cfg/jdbc.properties";
@@ -45,6 +46,7 @@ public class AskSafeTaiwan implements CallBackParser {
 	}
 
 	public void toDoSomething() {
+		
 		System.out.println("toDoSomething");
 	}
 
@@ -56,8 +58,7 @@ public class AskSafeTaiwan implements CallBackParser {
 		disasterNotificationParser.setKml(fileName);
 		List<DisasterNotification> list = disasterNotificationParser
 				.disasterNotificationParserList(disasterNotificationParser.getKml(), timestamp);
-//		filter DisasterNotification list
-//		if(false){
+//		filter DisasterNotification list 新竹
 //		PointFilterPolygon pointFilterPolygon = new PointFilterPolygon();
 //		List<HsinChuGeoJson> p = pointFilterPolygon.parserJson("");
 //		List<CoordinatesPoint> getCoordinatesPoint = pointFilterPolygon.getCityCoordinatesPoints(p,"新竹市");
@@ -67,14 +68,17 @@ public class AskSafeTaiwan implements CallBackParser {
 //			DisasterNotification disasterNotification=list1.get(i);
 //			CoordinatesPoint test = list1.get(i).getCoordinatesPoints().get(0);
 //			boolean TF= pointFilterPolygon.pointInPolygon(test);
-//			if(TF){
+//			if(TF && !disasterNotification.getName().contains("Simulate")){
 //				list.add(disasterNotification);
 //			}
 //		}
-//		}
+		
 		// database insert
 		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		disasterNotificationDBfunction.insertDisasterNotificationList(list);
+		//oracle
+		DisasterNotificationDBfunctionO disasterNotificationDBfunctionO = new DisasterNotificationDBfunctionO();
+		disasterNotificationDBfunctionO.insertDisasterNotificationList(list);
 
 		// print look
 		List<String> descriptionList = new ArrayList<String>();

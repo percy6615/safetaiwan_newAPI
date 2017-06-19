@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import safetaiwan_CommTools.CommonTools;
+import safetaiwan_CommTools.DBSource.DisasterNotificationDBfunction;
 
 public class LineHttps {
 	private final static String USER_AGENT = "Mozilla/5.0";
@@ -25,10 +27,18 @@ public class LineHttps {
 	static String replyBody = "{ \"to\":[\"Udd25c6f918b51a3840dff50eea1cf3af\"], \"messages\":[{\"type\":\"image\",  \"originalContentUrl\": \"http://www.hchannel.tv/wp-content/uploads/2016/12/Topic.jpg\",\"previewImageUrl\": \"https://static.pexels.com/photos/27714/pexels-photo-27714.jpg\"}]}";
 
 	public static void main(String[] args) {
-		sendGETProfile(lineurl,"U4d2a13ec6ff67efe2fcb5a9ea6a8ba65");
+		LineHttps LineHttps = new LineHttps();
+//		LineHttps.sendGETProfile(lineurl,"U0f3f3ce09f2bed28d7e98a5c4d623e3a");
+		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
+		List<String> useridList = disasterNotificationDBfunction.selectUserId();  
+		String content = "各位防救災的夥伴，大家好，演習已結束，恢復接受SafeTaiwan全台灣災情回報，謝謝。";
+		String jsonContent = "{ \"to\":[" + LineHttps.connectUserid(useridList)
+		+ "], \"messages\":[{\"type\":\"text\", \"text\":\"" + content
+		+ "\"}]}";
+		LineHttps.sendPOSTReturnToken(lineurl,jsonContent);
 	}
 
-	public String sendPOSTReturnToken(String url, String replyBody) {
+	public  String sendPOSTReturnToken(String url, String replyBody) {
 		CommonTools commonTools = new CommonTools();
 		HttpsURLConnection con = commonTools.SSLHttpConnection(url);
 		try {
@@ -68,7 +78,7 @@ public class LineHttps {
 		return token;
 	}
 
-	public static void sendGETProfile(String url, String userid) {
+	public  void sendGETProfile(String url, String userid) {
 		CommonTools commonTools = new CommonTools();
 		String profileURL = url+userid;
 		HttpsURLConnection con = commonTools.SSLHttpConnection(profileURL);
@@ -98,5 +108,22 @@ public class LineHttps {
 			e.printStackTrace();
 		}
 		
+	}
+	private  String connectUserid(List<String> useridList) {
+		String returnString = "";
+		if (useridList.size() != 0) {
+			returnString = "\"";
+		}
+		for (int i = 0, iend = useridList.size(); i < iend; i++) {
+			if (i == iend - 1) {
+				returnString = returnString + useridList.get(i) + "\"";
+			} else {
+				returnString = returnString + useridList.get(i) + "\",\"";
+			}
+
+		}
+
+		return returnString;
+
 	}
 }

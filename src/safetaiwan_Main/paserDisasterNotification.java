@@ -13,17 +13,19 @@ import org.jsoup.select.Elements;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 import safetaiwan_CommTools.CommonTools;
+import safetaiwan_CommTools.DBSourceO.DisasterNotificationDBfunctionO;
 import safetaiwan_messageObject.DisasterNotification;
 
 public class paserDisasterNotification {
 
 	public static void main(String[] args) {
-		List<String> useridList = new ArrayList<String>();
-		useridList.add("a");
-		useridList.add("b");
-		String flag = "<table border='0' padding='0' ><tr><td>安全臺灣SafeTaiwan@實機操作示範</br>2017-04-18 11:54:29</td></tr><tr><td><a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170418115242_357220077438888.jpg' border='0'><img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170418115242_357220077438888.jpg' width='300px' /></a></td></tr></table>";
-		descriptionParser(flag);
-		
+//		List<String> useridList = new ArrayList<String>();
+//		useridList.add("a");
+//		useridList.add("b");
+//		String flag = "<table border='0' padding='0' ><tr><td>安全臺灣SafeTaiwan@實機操作示範</br>2017-04-18 11:54:29</td></tr><tr><td><a href='http://link.safetaiwan.tw/mobile_app/report/pictures/20170418115242_357220077438888.jpg' border='0'><img src='http://link.safetaiwan.tw/mobile_app/report/pictures/20170418115242_357220077438888.jpg' width='300px' /></a></td></tr></table>";
+//		descriptionParser(flag);
+		DisasterNotificationDBfunctionO doo =new DisasterNotificationDBfunctionO();
+		System.out.println(doo.getDbReportTime());
 	}
 
 	public static String connectUserid(List<String> useridList) {

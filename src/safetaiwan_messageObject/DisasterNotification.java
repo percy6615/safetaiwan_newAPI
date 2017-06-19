@@ -52,6 +52,16 @@ public class DisasterNotification {
 		this.iconStyleID = iconStyleID;
 		this.KMLTime = KMLTime;
 	}
+	public DisasterNotification(String name, List<CoordinatesPoint> coordinatesPoint, String description,
+			String iconStyleID, Timestamp KMLTime,Timestamp reportdate) {
+		this.uuid = commonTools.generateUUID();
+		this.name = name;
+		this.coordinatesPoints = coordinatesPoint;
+		this.description = description;
+		this.iconStyleID = iconStyleID;
+		this.KMLTime = KMLTime;
+		this.reportDate = reportdate;
+	}
 
 	public int getFlag() {
 		return flag;

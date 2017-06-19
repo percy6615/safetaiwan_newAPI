@@ -1,12 +1,16 @@
 package safetaiwan_test;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,12 +45,26 @@ public class testMain {
 		// descriptionList.add(description);
 		// }
 //		db();
+		String strPath = "C:\\Dump20170116-2.sql";
+		File f = new File(strPath);
+		Path path = Paths.get(strPath);
+		try {
+			BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(attrs.creationTime().toMillis());
+			System.out.println(strPath + " 建立時間為："
+	                + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));
+			System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		  Timestamp ts = new Timestamp(System.currentTimeMillis());
-	        System.out.println("ts : " + ts);    
-	        Timestamp ts2 = Timestamp.valueOf("2018-10-01 08:01:01");
-	        int compareTo = ts.compareTo(ts2);        
-	        System.out.println("compareTo : " + compareTo);
+//		  Timestamp ts = new Timestamp(System.currentTimeMillis());
+//	        System.out.println("ts : " + ts);    
+//	        Timestamp ts2 = Timestamp.valueOf("2018-10-01 08:01:01");
+//	        int compareTo = ts.compareTo(ts2);        
+//	        System.out.println("compareTo : " + compareTo);
 	}
 
 	public static void getKml() {
