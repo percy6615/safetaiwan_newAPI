@@ -41,6 +41,7 @@ public class DownloadKMLFile implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//AIzaSyDY8_sPc9OYnI_WF9ws52m8vh965waIVOA
 		int layeridMain = Integer.valueOf(props.getProperty("safetaiwan.layerid"));
 		String YourAPIKeyMain = props.getProperty("safetaiwan.token");
 		HttpsURLConnectionToken httpsURLConnectionToken = new HttpsURLConnectionToken(layeridMain, YourAPIKeyMain);

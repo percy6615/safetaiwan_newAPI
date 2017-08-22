@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,8 +37,10 @@ public class KMLReceiveFromNet {
 		String a = null;
 		try {
 			a = formatXML(url);
-			// System.out.println(a);
+			 
 			List<String> lines = Arrays.asList(a);
+//			List<String> lines = new ArrayList<String>();
+//			lines.add(a);
 			String s = CommonTools.APPLocation();
 			String outFilePathALL = "";
 			if (flag == true) {
@@ -70,9 +73,9 @@ public class KMLReceiveFromNet {
 			HttpURLConnection connection = commonTools.SSLHttpConnection(xmlURL);
 			connection.setRequestMethod("GET");
 			// connection.setRequestProperty("Accept", "application/xml");
-
+			
 			InputStream src1 = connection.getInputStream();
-
+			
 			// add replace xmltitle 20170412
 			// String str = IOUtils.toString( src1 );
 			// IOUtils.closeQuietly( src1 );
@@ -106,6 +109,9 @@ public class KMLReceiveFromNet {
 			writer.getDomConfig().setParameter("xml-declaration", keepDeclaration);
 //			out.setByteStream(src1);
 //			writer.write(document, out);
+			connection.disconnect();
+			src1.close();
+			
 			return writer.writeToString(document);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

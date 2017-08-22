@@ -23,13 +23,15 @@ public class AskSafeTaiwan implements CallBackParser {
 	private DownloadKMLFile downloadFile;
 	private String fileName;
 	private Properties props = null;
-	private String imgHostUrl = "https://28f61bab.ngrok.io//";// port 80 https
+	
 	private String googleHostUrl = "http://60.250.226.78";
 	private String zoom = "17";
 	private String propertyfile =  "resources/cfg/jdbc.properties";
+	private String imgHostUrl ;// port 80 https
 	public AskSafeTaiwan() {
 		CommonTools commonTools= new CommonTools();
 		props = commonTools.getProperties(propertyfile);
+		imgHostUrl = props.getProperty("imgHostUrl");
 	}
 
 	// public AskSafeTaiwan(DownloadKMLFile downloadFile) {
@@ -76,9 +78,9 @@ public class AskSafeTaiwan implements CallBackParser {
 		// database insert
 		DisasterNotificationDBfunction disasterNotificationDBfunction = new DisasterNotificationDBfunction();
 		disasterNotificationDBfunction.insertDisasterNotificationList(list);
-		//oracle
-		DisasterNotificationDBfunctionO disasterNotificationDBfunctionO = new DisasterNotificationDBfunctionO();
-		disasterNotificationDBfunctionO.insertDisasterNotificationList(list);
+//		//oracle
+//		DisasterNotificationDBfunctionO disasterNotificationDBfunctionO = new DisasterNotificationDBfunctionO();
+//		disasterNotificationDBfunctionO.insertDisasterNotificationList(list);
 
 		// print look
 		List<String> descriptionList = new ArrayList<String>();
